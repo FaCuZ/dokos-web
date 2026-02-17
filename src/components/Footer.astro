@@ -22,10 +22,9 @@ const homePath = `${getLocalePath(locale)}/`;
       </a>
 
       <nav class="flex space-x-6" aria-label="Footer navigation">
-        <a class="text-slate-400 hover:text-white transition-colors" href="#">{t.footer.privacy}</a>
-        <a class="text-slate-400 hover:text-white transition-colors" href="#">{t.footer.terms}</a>
-        <a class="text-slate-400 hover:text-white transition-colors" href="#" rel="noopener noreferrer">GitHub</a>
-        <a class="text-slate-400 hover:text-white transition-colors" href="#" rel="noopener noreferrer">Twitter</a>
+        <button id="privacy-btn" class="text-slate-400 hover:text-white transition-colors" type="button">{t.footer.privacy}</button>
+        <button id="terms-btn" class="text-slate-400 hover:text-white transition-colors" type="button">{t.footer.terms}</button>
+        <a class="text-slate-400 hover:text-white transition-colors" href="mailto:hello@dokos.app">{t.footer.contact}</a>
       </nav>
 
       <div class="mt-4 md:mt-0 text-slate-500 text-sm">
@@ -34,3 +33,75 @@ const homePath = `${getLocalePath(locale)}/`;
     </div>
   </div>
 </footer>
+
+<!-- Privacy Modal -->
+<div id="privacy-modal" class="fixed inset-0 z-[100] hidden items-center justify-center" role="dialog" aria-modal="true" aria-labelledby="privacy-modal-title">
+  <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" data-modal-backdrop></div>
+  <div class="relative bg-white dark:bg-slate-900 rounded-2xl shadow-2xl max-w-2xl w-full mx-4 max-h-[80vh] flex flex-col">
+    <div class="flex items-center justify-between p-6 border-b border-slate-200 dark:border-slate-700">
+      <h3 id="privacy-modal-title" class="text-xl font-bold text-slate-900 dark:text-white">{t.footer.privacy}</h3>
+      <button data-modal-close class="text-slate-400 hover:text-slate-600 dark:hover:text-white transition-colors" aria-label="Close">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <div class="p-6 overflow-y-auto text-slate-600 dark:text-slate-300 text-sm leading-relaxed space-y-4">
+      <p>{t.footer.privacyIntro}</p>
+      <h4 class="font-semibold text-slate-900 dark:text-white">{t.footer.privacyDataTitle}</h4>
+      <p>{t.footer.privacyDataContent}</p>
+      <h4 class="font-semibold text-slate-900 dark:text-white">{t.footer.privacyStorageTitle}</h4>
+      <p>{t.footer.privacyStorageContent}</p>
+      <h4 class="font-semibold text-slate-900 dark:text-white">{t.footer.privacyContactTitle}</h4>
+      <p>{t.footer.privacyContactContent}</p>
+    </div>
+  </div>
+</div>
+
+<!-- Terms Modal -->
+<div id="terms-modal" class="fixed inset-0 z-[100] hidden items-center justify-center" role="dialog" aria-modal="true" aria-labelledby="terms-modal-title">
+  <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" data-modal-backdrop></div>
+  <div class="relative bg-white dark:bg-slate-900 rounded-2xl shadow-2xl max-w-2xl w-full mx-4 max-h-[80vh] flex flex-col">
+    <div class="flex items-center justify-between p-6 border-b border-slate-200 dark:border-slate-700">
+      <h3 id="terms-modal-title" class="text-xl font-bold text-slate-900 dark:text-white">{t.footer.terms}</h3>
+      <button data-modal-close class="text-slate-400 hover:text-slate-600 dark:hover:text-white transition-colors" aria-label="Close">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <div class="p-6 overflow-y-auto text-slate-600 dark:text-slate-300 text-sm leading-relaxed space-y-4">
+      <p>{t.footer.termsIntro}</p>
+      <h4 class="font-semibold text-slate-900 dark:text-white">{t.footer.termsUsageTitle}</h4>
+      <p>{t.footer.termsUsageContent}</p>
+      <h4 class="font-semibold text-slate-900 dark:text-white">{t.footer.termsLiabilityTitle}</h4>
+      <p>{t.footer.termsLiabilityContent}</p>
+      <h4 class="font-semibold text-slate-900 dark:text-white">{t.footer.termsChangesTitle}</h4>
+      <p>{t.footer.termsChangesContent}</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  function setupModal(btnId: string, modalId: string) {
+    const btn = document.getElementById(btnId);
+    const modal = document.getElementById(modalId);
+    if (!btn || !modal) return;
+
+    btn.addEventListener('click', () => {
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    });
+
+    const close = () => {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    };
+
+    modal.querySelector('[data-modal-backdrop]')?.addEventListener('click', close);
+    modal.querySelector('[data-modal-close]')?.addEventListener('click', close);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal.classList.contains('hidden')) close();
+    });
+  }
+
+  setupModal('privacy-btn', 'privacy-modal');
+  setupModal('terms-btn', 'terms-modal');
+</script>

@@ -15,20 +15,25 @@ const homePath = `${getLocalePath(locale)}/`;
 ---
 
 <header>
-  <nav class="sticky top-0 z-50 w-full backdrop-blur-md bg-white/70 dark:bg-background-dark/80 border-b border-slate-200 dark:border-slate-800" aria-label="Main navigation">
+  <nav
+    id="main-nav"
+    class="fixed top-0 z-50 w-full transition-all duration-300 ease-out translate-y-0 border-b border-transparent"
+    aria-label="Main navigation"
+    data-scrolled="false"
+  >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
-        <a href={homePath} class="flex-shrink-0 flex items-center gap-2" aria-label="Dokos - Home">
+        <a href={homePath} class="flex-shrink-0 flex items-center gap-2 transition-transform duration-200 hover:scale-105" aria-label="Dokos - Home">
           <img src={logoDark.src} alt="Dokos" class="h-8 w-8 hidden dark:block" />
           <img src={logoLight.src} alt="Dokos" class="h-8 w-8 block dark:hidden" />
           <span class="font-bold text-xl tracking-tight">Dokos</span>
         </a>
 
         <div class="hidden md:flex items-center space-x-8">
-          <a class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors" href="#formats">{t.navbar.formats}</a>
-          <a class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors" href="#visual">{t.navbar.visual}</a>
-          <a class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors" href="#project">{t.navbar.project}</a>
-          <a class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors" href="#profiles">{t.navbar.profiles}</a>
+          <a class="nav-link relative text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors" href="#formats">{t.navbar.formats}</a>
+          <a class="nav-link relative text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors" href="#visual">{t.navbar.visual}</a>
+          <a class="nav-link relative text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors" href="#project">{t.navbar.project}</a>
+          <a class="nav-link relative text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors" href="#profiles">{t.navbar.profiles}</a>
         </div>
 
         <div class="flex items-center gap-3">
@@ -85,7 +90,11 @@ const homePath = `${getLocalePath(locale)}/`;
       </div>
     </div>
 
-    <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark">
+    <div
+      id="mobile-menu"
+      class="md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark overflow-hidden transition-all duration-300 ease-out"
+      style="max-height: 0; opacity: 0;"
+    >
       <div class="px-4 py-4 space-y-3">
         <a class="block text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="#formats">{t.navbar.formats}</a>
         <a class="block text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="#visual">{t.navbar.visual}</a>
@@ -122,7 +131,96 @@ const homePath = `${getLocalePath(locale)}/`;
   </nav>
 </header>
 
+<style>
+  /* Underline animation for nav links */
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background: var(--color-primary, #6366f1);
+    border-radius: 1px;
+    transition: width 0.25s ease-out;
+  }
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  /* Navbar scrolled state */
+  nav[data-scrolled="true"] {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.8);
+    border-bottom-color: rgb(226 232 240); /* slate-200 */
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  }
+  :global(.dark) nav[data-scrolled="true"] {
+    background: rgba(15, 23, 42, 0.85);
+    border-bottom-color: rgb(30 41 59); /* slate-800 */
+  }
+
+  /* Initial entrance animation */
+  nav {
+    animation: nav-slide-down 0.5s ease-out both;
+  }
+  @keyframes nav-slide-down {
+    from {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Hidden state for hide-on-scroll */
+  nav.nav-hidden {
+    transform: translateY(-100%);
+  }
+</style>
+
 <script>
+  const nav = document.getElementById('main-nav');
+  let lastScrollY = window.scrollY;
+  let ticking = false;
+  const SCROLL_THRESHOLD = 10;
+  const SHOW_OFFSET = 60;
+
+  function updateNav() {
+    const currentScrollY = window.scrollY;
+
+    // Scrolled state (background + blur)
+    const isScrolled = currentScrollY > 20;
+    nav?.setAttribute('data-scrolled', String(isScrolled));
+
+    // Hide/show on scroll direction
+    if (currentScrollY > SHOW_OFFSET) {
+      if (currentScrollY - lastScrollY > SCROLL_THRESHOLD) {
+        // Scrolling down — hide
+        nav?.classList.add('nav-hidden');
+      } else if (lastScrollY - currentScrollY > SCROLL_THRESHOLD) {
+        // Scrolling up — show
+        nav?.classList.remove('nav-hidden');
+      }
+    } else {
+      // Near top — always show
+      nav?.classList.remove('nav-hidden');
+    }
+
+    lastScrollY = currentScrollY;
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(updateNav);
+      ticking = true;
+    }
+  }, { passive: true });
+
   // Language dropdown toggle
   const langBtn = document.getElementById('lang-btn');
   const langDropdown = document.getElementById('lang-dropdown');
@@ -138,23 +236,36 @@ const homePath = `${getLocalePath(locale)}/`;
     langBtn?.setAttribute('aria-expanded', 'false');
   });
 
-  // Mobile menu toggle
+  // Mobile menu toggle with smooth animation
   const btn = document.getElementById('mobile-menu-btn');
-  const menu = document.getElementById('mobile-menu');
+  const menu = document.getElementById('mobile-menu') as HTMLElement | null;
+  let menuOpen = false;
+
+  function openMenu() {
+    if (!menu) return;
+    menuOpen = true;
+    menu.style.maxHeight = menu.scrollHeight + 'px';
+    menu.style.opacity = '1';
+    btn?.setAttribute('aria-expanded', 'true');
+    const icon = btn?.querySelector('.material-symbols-outlined');
+    if (icon) icon.textContent = 'close';
+  }
+
+  function closeMenu() {
+    if (!menu) return;
+    menuOpen = false;
+    menu.style.maxHeight = '0';
+    menu.style.opacity = '0';
+    btn?.setAttribute('aria-expanded', 'false');
+    const icon = btn?.querySelector('.material-symbols-outlined');
+    if (icon) icon.textContent = 'menu';
+  }
 
   btn?.addEventListener('click', () => {
-    const isOpen = menu?.classList.toggle('hidden') === false;
-    btn.setAttribute('aria-expanded', String(isOpen));
-    const icon = btn.querySelector('.material-symbols-outlined');
-    if (icon) icon.textContent = isOpen ? 'close' : 'menu';
+    menuOpen ? closeMenu() : openMenu();
   });
 
   menu?.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      menu.classList.add('hidden');
-      btn?.setAttribute('aria-expanded', 'false');
-      const icon = btn?.querySelector('.material-symbols-outlined');
-      if (icon) icon.textContent = 'menu';
-    });
+    link.addEventListener('click', closeMenu);
   });
 </script>

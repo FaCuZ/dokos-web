@@ -106,6 +106,21 @@
   },
   "footer": {
     "privacy": "隐私政策",
-    "terms": "使用条款"
+    "terms": "使用条款",
+    "contact": "联系我们",
+    "privacyIntro": "在 Dokos，您的隐私很重要。本政策说明了您使用我们的应用程序时我们如何处理您的数据。",
+    "privacyDataTitle": "数据收集",
+    "privacyDataContent": "Dokos 是一个本地优先的应用程序。您的文件完全在您的设备上处理。我们不会在服务器上收集、传输或存储您的任何文档或个人数据。",
+    "privacyStorageTitle": "本地存储",
+    "privacyStorageContent": "所有偏好设置和配置都存储在您的本地设备上。我们不会在应用程序中使用 Cookie 或跟踪技术。",
+    "privacyContactTitle": "联系方式",
+    "privacyContactContent": "如果您对本隐私政策有任何疑问，请通过 hello@dokos.app 联系我们。",
+    "termsIntro": "使用 Dokos 即表示您同意以下条款和条件。",
+    "termsUsageTitle": "使用",
+    "termsUsageContent": "Dokos 供个人和商业使用。您可以在任意数量的设备上安装和使用它。",
+    "termsLiabilityTitle": "责任限制",
+    "termsLiabilityContent": "Dokos 按\"原样\"提供，不提供任何形式的保证。我们不对因使用本应用程序而产生的任何损害负责。",
+    "termsChangesTitle": "条款变更",
+    "termsChangesContent": "我们保留随时更新这些条款的权利。继续使用 Dokos 即表示接受任何更改。"
   }
 }

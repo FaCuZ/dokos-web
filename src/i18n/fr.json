@@ -106,6 +106,21 @@
   },
   "footer": {
     "privacy": "Confidentialité",
-    "terms": "Conditions"
+    "terms": "Conditions",
+    "contact": "Contact",
+    "privacyIntro": "Chez Dokos, votre vie privée compte. Cette politique explique comment nous traitons vos données lorsque vous utilisez notre application.",
+    "privacyDataTitle": "Collecte de Données",
+    "privacyDataContent": "Dokos est une application locale. Vos fichiers sont traités entièrement sur votre appareil. Nous ne collectons, transmettons ni stockons aucun de vos documents ou données personnelles sur nos serveurs.",
+    "privacyStorageTitle": "Stockage Local",
+    "privacyStorageContent": "Toutes les préférences et paramètres sont stockés localement sur votre appareil. Nous n'utilisons pas de cookies ni de technologies de suivi dans l'application.",
+    "privacyContactTitle": "Contact",
+    "privacyContactContent": "Si vous avez des questions concernant cette politique de confidentialité, contactez-nous à hello@dokos.app.",
+    "termsIntro": "En utilisant Dokos, vous acceptez les termes et conditions suivants.",
+    "termsUsageTitle": "Utilisation",
+    "termsUsageContent": "Dokos est fourni pour un usage personnel et commercial. Vous pouvez l'installer et l'utiliser sur autant d'appareils que vous le souhaitez.",
+    "termsLiabilityTitle": "Limitation de Responsabilité",
+    "termsLiabilityContent": "Dokos est fourni \"tel quel\" sans garantie d'aucune sorte. Nous ne sommes pas responsables des dommages résultant de l'utilisation de l'application.",
+    "termsChangesTitle": "Modifications des Conditions",
+    "termsChangesContent": "Nous nous réservons le droit de mettre à jour ces conditions à tout moment. L'utilisation continue de Dokos constitue l'acceptation de toute modification."
   }
 }

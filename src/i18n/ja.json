@@ -106,6 +106,21 @@
   },
   "footer": {
     "privacy": "プライバシー",
-    "terms": "利用規約"
+    "terms": "利用規約",
+    "contact": "お問い合わせ",
+    "privacyIntro": "Dokosでは、お客様のプライバシーを大切にしています。このポリシーでは、アプリケーション使用時のデータの取り扱いについて説明します。",
+    "privacyDataTitle": "データ収集",
+    "privacyDataContent": "Dokosはローカルファーストのアプリケーションです。ファイルはすべてお客様のデバイス上で処理されます。ドキュメントや個人データをサーバーで収集、送信、保存することはありません。",
+    "privacyStorageTitle": "ローカルストレージ",
+    "privacyStorageContent": "すべての設定とプリファレンスはデバイスにローカルに保存されます。アプリケーション内でCookieやトラッキング技術は使用しません。",
+    "privacyContactTitle": "連絡先",
+    "privacyContactContent": "このプライバシーポリシーについてご質問がある場合は、hello@dokos.app までお問い合わせください。",
+    "termsIntro": "Dokosを使用することにより、以下の利用規約に同意したものとみなされます。",
+    "termsUsageTitle": "利用",
+    "termsUsageContent": "Dokosは個人および商用利用向けに提供されています。お持ちのデバイスに自由にインストールして使用できます。",
+    "termsLiabilityTitle": "責任の制限",
+    "termsLiabilityContent": "Dokosは「現状のまま」提供され、いかなる保証もありません。アプリケーションの使用から生じるいかなる損害についても責任を負いません。",
+    "termsChangesTitle": "規約の変更",
+    "termsChangesContent": "これらの規約はいつでも更新する権利を留保します。Dokosの継続使用は変更の承諾を意味します。"
   }
 }

@@ -4,7 +4,8 @@
       "WebFetch(domain:www.vectorlogo.zone)",
       "WebFetch(domain:raw.githubusercontent.com)",
       "WebFetch(domain:commons.wikimedia.org)",
-      "WebFetch(domain:cdn.worldvectorlogo.com)"
+      "WebFetch(domain:cdn.worldvectorlogo.com)",
+      "Bash(echo:*)"
     ],
     "additionalDirectories": [
       "c:\\Users\\fzald\\Desarrollos\\Propios\\dokos-lp\\example\\assets"

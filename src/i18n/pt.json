@@ -106,6 +106,21 @@
   },
   "footer": {
     "privacy": "Privacidade",
-    "terms": "Termos"
+    "terms": "Termos",
+    "contact": "Contato",
+    "privacyIntro": "Na Dokos, sua privacidade importa. Esta política explica como tratamos seus dados ao usar nosso aplicativo.",
+    "privacyDataTitle": "Coleta de Dados",
+    "privacyDataContent": "Dokos é um aplicativo local. Seus arquivos são processados inteiramente no seu dispositivo. Não coletamos, transmitimos ou armazenamos seus documentos ou dados pessoais em nossos servidores.",
+    "privacyStorageTitle": "Armazenamento Local",
+    "privacyStorageContent": "Todas as preferências e configurações são armazenadas localmente no seu dispositivo. Não usamos cookies ou tecnologias de rastreamento no aplicativo.",
+    "privacyContactTitle": "Contato",
+    "privacyContactContent": "Se você tiver alguma dúvida sobre esta política de privacidade, entre em contato conosco em hello@dokos.app.",
+    "termsIntro": "Ao usar o Dokos, você concorda com os seguintes termos e condições.",
+    "termsUsageTitle": "Uso",
+    "termsUsageContent": "Dokos é fornecido para uso pessoal e comercial. Você pode instalá-lo e usá-lo em quantos dispositivos desejar.",
+    "termsLiabilityTitle": "Limitação de Responsabilidade",
+    "termsLiabilityContent": "Dokos é fornecido \"como está\" sem garantia de qualquer tipo. Não somos responsáveis por quaisquer danos decorrentes do uso do aplicativo.",
+    "termsChangesTitle": "Alterações nos Termos",
+    "termsChangesContent": "Reservamo-nos o direito de atualizar estes termos a qualquer momento. O uso continuado do Dokos constitui aceitação de quaisquer alterações."
   }
 }

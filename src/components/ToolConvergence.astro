@@ -9,42 +9,86 @@ interface Props {
 
 const { t } = Astro.props;
 
-const tools = [
-  { icon: 'code', color: 'text-blue-400', label: t.toolConvergence.editor },
-  { icon: 'picture_as_pdf', color: 'text-red-400', label: t.toolConvergence.pdf },
-  { icon: 'public', color: 'text-yellow-400', label: t.toolConvergence.browser },
-  { icon: 'table_view', color: 'text-green-500', label: t.toolConvergence.excel },
-  { icon: 'terminal', color: 'text-gray-400', label: t.toolConvergence.term },
+// All supported format icons — one per distinct format/viewer
+const formatIcons = [
+  // Markdown
+  { icon: 'article', label: '.md', color: 'text-blue-400', glow: 'shadow-blue-500/20' },
+  // PDF
+  { icon: 'picture_as_pdf', label: '.pdf', color: 'text-red-400', glow: 'shadow-red-500/20' },
+  // Code languages
+  { icon: 'code', label: '.py', color: 'text-green-400', glow: 'shadow-green-500/20' },
+  { icon: 'code', label: '.ts', color: 'text-blue-300', glow: 'shadow-blue-400/20' },
+  { icon: 'code', label: '.js', color: 'text-yellow-300', glow: 'shadow-yellow-400/20' },
+  { icon: 'code', label: '.rs', color: 'text-orange-400', glow: 'shadow-orange-500/20' },
+  { icon: 'code', label: '.go', color: 'text-cyan-300', glow: 'shadow-cyan-400/20' },
+  { icon: 'code', label: '.java', color: 'text-red-300', glow: 'shadow-red-400/20' },
+  { icon: 'code', label: '.cpp', color: 'text-blue-500', glow: 'shadow-blue-600/20' },
+  { icon: 'code', label: '.rb', color: 'text-rose-400', glow: 'shadow-rose-500/20' },
+  { icon: 'code', label: '.swift', color: 'text-orange-300', glow: 'shadow-orange-400/20' },
+  { icon: 'code', label: '.php', color: 'text-violet-400', glow: 'shadow-violet-500/20' },
+  { icon: 'code', label: '.css', color: 'text-sky-400', glow: 'shadow-sky-500/20' },
+  // Data & config
+  { icon: 'data_object', label: '.json', color: 'text-yellow-400', glow: 'shadow-yellow-500/20' },
+  { icon: 'table_view', label: '.csv', color: 'text-emerald-400', glow: 'shadow-emerald-500/20' },
+  { icon: 'table_view', label: '.tsv', color: 'text-emerald-300', glow: 'shadow-emerald-400/20' },
+  { icon: 'schema', label: '.yaml', color: 'text-indigo-400', glow: 'shadow-indigo-500/20' },
+  { icon: 'settings', label: '.toml', color: 'text-slate-400', glow: 'shadow-slate-500/20' },
+  { icon: 'settings', label: '.ini', color: 'text-gray-400', glow: 'shadow-gray-500/20' },
+  // Shell & scripting
+  { icon: 'terminal', label: '.sh', color: 'text-gray-300', glow: 'shadow-gray-400/20' },
+  { icon: 'terminal', label: '.ps1', color: 'text-blue-200', glow: 'shadow-blue-300/20' },
+  // Web
+  { icon: 'public', label: '.html', color: 'text-cyan-400', glow: 'shadow-cyan-500/20' },
+  { icon: 'image', label: '.svg', color: 'text-amber-400', glow: 'shadow-amber-500/20' },
+  // Documents & media
+  { icon: 'book', label: '.epub', color: 'text-fuchsia-400', glow: 'shadow-fuchsia-500/20' },
+  { icon: 'analytics', label: '.ipynb', color: 'text-purple-400', glow: 'shadow-purple-500/20' },
+  { icon: 'bug_report', label: '.log', color: 'text-amber-400', glow: 'shadow-amber-500/20' },
+  { icon: 'description', label: '.txt', color: 'text-orange-400', glow: 'shadow-orange-500/20' },
+  // Database & API
+  { icon: 'database', label: '.sql', color: 'text-pink-400', glow: 'shadow-pink-500/20' },
+  { icon: 'hub', label: '.graphql', color: 'text-pink-300', glow: 'shadow-pink-400/20' },
+  { icon: 'swap_horiz', label: 'API', color: 'text-sky-400', glow: 'shadow-sky-500/20' },
+  // Images
+  { icon: 'image', label: '.png', color: 'text-teal-400', glow: 'shadow-teal-500/20' },
+  { icon: 'image', label: '.jpg', color: 'text-teal-300', glow: 'shadow-teal-400/20' },
+  { icon: 'image', label: '.webp', color: 'text-lime-400', glow: 'shadow-lime-500/20' },
+  { icon: 'image', label: '.gif', color: 'text-green-300', glow: 'shadow-green-400/20' },
+  // Build files
+  { icon: 'view_kanban', label: '.xml', color: 'text-teal-400', glow: 'shadow-teal-500/20' },
+  { icon: 'build', label: 'Makefile', color: 'text-stone-400', glow: 'shadow-stone-500/20' },
+  { icon: 'deployed_code', label: 'Docker', color: 'text-sky-300', glow: 'shadow-sky-400/20' },
+];
+
+// Shuffle helper with deterministic seed
+function shuffle<T>(arr: T[], seed: number): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = (seed * (i + 1) * 7 + 13) % (i + 1);
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+const rows = [
+  { items: shuffle(formatIcons, 17), duration: 55 },
+  { items: shuffle(formatIcons, 43), duration: 40 },
+  { items: shuffle(formatIcons, 79), duration: 65 },
+  { items: shuffle(formatIcons, 113), duration: 48 },
 ];
 ---
 
+<!-- Old ToolConvergence preserved as comment
 <section class="py-16 bg-background-dark border-y border-slate-800" aria-labelledby="convergence-heading">
   <div class="max-w-5xl mx-auto px-4 text-center">
     <h2 id="convergence-heading" class="text-3xl font-bold text-white mb-12">
       {t.toolConvergence.heading} <span class="text-primary">{t.toolConvergence.headingHighlight}</span>
     </h2>
-
     <div class="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 relative">
       <div class="flex gap-4 md:gap-6 opacity-60 grayscale hover:grayscale-0 transition-all duration-300">
-        {tools.map((tool) => (
-          <div class="flex flex-col items-center gap-2">
-            <div class="w-14 h-14 bg-slate-800 rounded-xl flex items-center justify-center border border-slate-700 shadow-lg">
-              <Icon name={tool.icon} size="text-3xl" class={tool.color} />
-            </div>
-            <span class="text-xs text-slate-500">{tool.label}</span>
-          </div>
-        ))}
+        ...tools icons...
       </div>
-
-      <div class="hidden md:flex items-center justify-center text-slate-600">
-        <Icon name="arrow_forward" size="text-4xl" class="animate-pulse" />
-      </div>
-      <div class="md:hidden flex items-center justify-center text-slate-600 my-4">
-        <Icon name="arrow_downward" size="text-4xl" class="animate-pulse" />
-      </div>
-
       <div class="flex flex-col items-center gap-2 relative z-10 group">
-        <div class="absolute inset-0 bg-primary/40 blur-2xl rounded-full transform scale-110 group-hover:scale-125 transition-transform duration-500" aria-hidden="true"></div>
         <div class="w-20 h-20 bg-gradient-to-br from-primary to-primary-dark hexagon flex items-center justify-center border-2 border-primary/50 shadow-glow relative z-10 p-3">
           <img src={logoDark.src} alt="Dokos" class="w-full h-full object-contain" />
         </div>
@@ -53,3 +97,112 @@ const tools = [
     </div>
   </div>
 </section>
+-->
+
+<section class="convergence-section relative overflow-hidden bg-background-dark" aria-labelledby="convergence-heading">
+  <!-- Scrolling icon rows background -->
+  <div class="icon-rows-bg absolute inset-0" aria-hidden="true">
+    {rows.map((row, rowIdx) => (
+      <div
+        class="icon-row"
+        style={`--duration: ${row.duration}s; --offset: ${rowIdx * -4}s;`}
+      >
+        <div class="icon-row-track">
+          {/* Triple items for seamless loop on wide screens */}
+          {[...row.items, ...row.items, ...row.items].map((item) => (
+            <div class={`icon-cell ${item.glow}`}>
+              <Icon name={item.icon} size="text-2xl" class={item.color} />
+              <span class={`icon-label ${item.color}`}>{item.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Fade overlays -->
+  <div class="absolute inset-0 z-10 pointer-events-none" aria-hidden="true">
+    <div class="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-background-dark to-transparent"></div>
+    <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background-dark to-transparent"></div>
+    <div class="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-background-dark to-transparent"></div>
+    <div class="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-background-dark to-transparent"></div>
+  </div>
+
+  <!-- Center content overlay -->
+  <div class="relative z-20 flex flex-col items-center justify-center py-12 md:py-16 px-4">
+    <!-- Logo with glow -->
+    <div class="relative group mb-8">
+      <div class="absolute -inset-6 bg-primary/20 blur-3xl rounded-full" aria-hidden="true"></div>
+      <div class="absolute -inset-3 bg-primary/8 blur-xl rounded-full" aria-hidden="true"></div>
+      <div class="relative w-20 h-20 bg-gradient-to-br from-primary/30 via-primary/15 to-blue-900/40 backdrop-blur-sm rounded-2xl border border-primary/30 flex items-center justify-center shadow-xl shadow-primary/25 ring-1 ring-primary/10 p-4">
+        <img src={logoDark.src} alt="Dokos" class="w-full h-full object-contain" />
+      </div>
+    </div>
+
+    <!-- Text -->
+    <h2 id="convergence-heading" class="convergence-heading text-3xl md:text-4xl font-bold text-white text-center mb-4 max-w-xl">
+      {t.toolConvergence.heading} <span class="text-primary">{t.toolConvergence.headingHighlight}</span>
+    </h2>
+  </div>
+</section>
+
+<style>
+  .convergence-section {
+    min-height: 360px;
+  }
+
+  .icon-rows-bg {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 14px;
+    opacity: 0.35;
+  }
+
+  .icon-row {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .icon-row-track {
+    display: flex;
+    gap: 14px;
+    animation: scroll-row var(--duration) linear infinite var(--offset);
+    width: max-content;
+  }
+
+  .icon-cell {
+    flex-shrink: 0;
+    width: 72px;
+    height: 72px;
+    border-radius: 16px;
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid rgba(51, 65, 85, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    box-shadow: 0 4px 12px var(--tw-shadow-color, transparent);
+  }
+
+  .convergence-heading {
+    text-shadow: 0 0 10px rgba(0, 0, 0, 1), 0 0 30px rgba(0, 0, 0, 0.9), 0 2px 40px rgba(0, 0, 0, 0.8);
+  }
+
+  .icon-label {
+    font-size: 9px;
+    font-family: 'JetBrains Mono', monospace;
+    opacity: 0.7;
+  }
+
+  @keyframes scroll-row {
+    0% {
+      transform: translateX(calc(-100% / 3));
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+</style>

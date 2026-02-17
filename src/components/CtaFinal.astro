@@ -1,5 +1,7 @@
 ---
 import Icon from './Icon.astro';
+import logoDark from '../assets/logo-dark.svg';
+import logoLight from '../assets/logo-light.svg';
 import type { Translations } from '../i18n/utils';
 
 interface Props {
@@ -13,6 +15,11 @@ const { t } = Astro.props;
   <div class="absolute inset-0 bg-gradient-to-t from-primary/20 via-background-dark to-background-dark" aria-hidden="true"></div>
 
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+    <div class="mb-8 flex justify-center">
+      <img src={logoDark.src} alt="Dokos" class="h-24 w-24 hidden dark:block" />
+      <img src={logoLight.src} alt="Dokos" class="h-24 w-24 block dark:hidden" />
+    </div>
+
     <h2 id="cta-heading" class="text-4xl md:text-6xl font-black text-white mb-8 tracking-tight">
       {t.ctaFinal.headingLine1}<br />
       <span class="text-primary">{t.ctaFinal.headingLine2}</span>
