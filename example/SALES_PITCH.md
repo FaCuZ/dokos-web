@@ -20,9 +20,23 @@ Dokos es una **aplicacion de escritorio nativa** (Windows, Mac, Linux) disenada 
 
 ---
 
+## Funcionalidades importantes
+
+Lo que hace a Dokos distinto, en un vistazo:
+
+- **Comparar archivos** — Diff integrado con dos archivos: vista lado a lado o inline, desde el menu contextual del arbol.
+- **Edicion con el motor de VS Code** — Monaco Editor dentro de Dokos: mismo resaltado, atajos y sensacion que en VS Code.
+- **30+ formatos y 17 visores** — Cada tipo de archivo (Markdown, PDF, JSON, CSV, OpenAPI, notebooks, logs, etc.) tiene su visor especializado.
+- **Busqueda global** — `Ctrl+Shift+F`: busca en todo el proyecto con regex, filtros por extension y carpeta.
+- **Navegacion en archivos comprimidos** — Abre ZIP, tar.gz y tar.bz2 en el arbol; explora su contenido como una carpeta mas.
+- **Sesiones persistentes** — Pestanas, archivo activo y carpetas expandidas se restauran al volver al proyecto.
+- **Chat con IA integrado** — *(Proximamente)* Consulta tus documentos desde Dokos con un asistente de IA.
+
+---
+
 ## Por que elegir Dokos?
 
-### 1. Soporte para +18 formatos de archivo
+### 1. Soporte para 30+ formatos de archivo
 
 No importa que formato uses, Dokos lo entiende:
 
@@ -68,6 +82,28 @@ Basado en **Monaco Editor** (el mismo motor de VS Code):
 ---
 
 ### 4. Visores especializados que marcan la diferencia
+
+Dokos incluye **17 visores distintos**, cada uno adaptado a un tipo de archivo o uso:
+
+| # | Visor | Formatos / uso |
+|---|--------|----------------|
+| 1 | **DiffViewer** | Comparacion "Comparar con" entre dos archivos |
+| 2 | **MarkdownViewer** | .md, .markdown, .mdown, .mkd, .mdwn |
+| 3 | **HtmlPreview** | .html, .htm |
+| 4 | **CsvViewer** | .csv |
+| 5 | **TsvViewer** | .tsv, .tab |
+| 6 | **ImageViewer** | .png, .jpg, .jpeg, .gif, .bmp, .ico, .webp |
+| 7 | **PdfViewer** | .pdf |
+| 8 | **EpubViewer** | .epub |
+| 9 | **JsonViewer** | .json |
+| 10 | **YamlViewer** | .yaml, .yml |
+| 11 | **TomlViewer** | .toml |
+| 12 | **IniViewer** | .ini, .cfg, .conf |
+| 13 | **NotebookViewer** | .ipynb (Jupyter Notebook) |
+| 14 | **LogViewer** | .log |
+| 15 | **SvgViewer** | .svg |
+| 16 | **OpenApiViewer** | OpenAPI/Swagger (auto-detectado en .json o .yaml) |
+| 17 | **CodeViewer** | Codigo y texto plano (resto de extensiones) |
 
 Cada tipo de archivo tiene su visor optimizado:
 
@@ -121,15 +157,16 @@ Haz que Dokos se sienta tuyo:
 
 ---
 
-### 7. Disponible en 9 idiomas
+### 7. Disponible en 16 idiomas
 
 Dokos habla tu idioma:
 
-| | | |
-|---|---|---|
-| Espanol | English | Portugues |
-| Deutsch | Francais | Hindi |
-| Japones | Ruso | Chino |
+| | | | |
+|---|---|---|---|
+| Espanol | English | Portugues | Deutsch |
+| Francais | Hindi | Chino | Japones |
+| Ruso | Coreano | Italiano | Turco |
+| Vietnamita | Indonesio | Bengalí | Tailandes |
 
 Toda la interfaz traducida: menus, configuracion, mensajes y visores.
 
@@ -160,17 +197,42 @@ Toda la interfaz traducida: menus, configuracion, mensajes y visores.
 
 ---
 
+## Comparativa con la competencia
+
+Dokos se sitúa entre el editor de Markdown, el visor de documentos y la herramienta de codigo. Esta tabla resume como se compara con alternativas habituales del mercado:
+
+| Funcionalidad | **Dokos** | Typora | Obsidian | VS Code | Okular |
+|---|---|---|---|---|---|
+| **Precio** | Gratis | De pago (un solo pago) | Gratis (uso personal) | Gratis | Gratis |
+| **Markdown + vista previa** | Si | Si (WYSIWYG) | Si | Si (extensiones) | No |
+| **LaTeX / formulas** | Si | Si | Si | Con extension | No |
+| **Diagramas Mermaid** | Si | No | Con plugin | Con extension | No |
+| **Visor PDF nativo** | Si | Exportar solo | Con plugin | Con extension | Si |
+| **Visor EPUB nativo** | Si | Importar solo | No | No | Si |
+| **JSON / YAML / CSV / TOML** (visores nativos) | Si (17 visores) | No | No | Con extensiones | No |
+| **Codigo** (resaltado, muchos lenguajes) | Si (Monaco) | Basico | Basico | Si (Monaco) | No |
+| **Comparar archivos (diff)** | Si integrado | No | No | Si | No |
+| **Motor de edicion** | Monaco (VS Code) | Propio | Propio | Monaco | No es editor |
+| **Busqueda en todo el proyecto** | Si (regex, filtros) | No | Si | Si | En documento |
+| **Windows, Mac, Linux** | Si | Si | Si (+ movil) | Si | Si |
+| **App ligera (nativa)** | Si (Tauri/Rust) | Electron | Electron | Electron | Nativa (KDE) |
+| **Chat / IA integrado** | Proximamente | No | Con plugin de pago | Copilot (de pago) | No |
+
+**Resumen:** Typora y Obsidian estan centrados en Markdown y notas; VS Code es una IDE completa con extensiones para todo pero mas pesada y orientada a desarrollo. Okular es un gran visor de documentos (PDF, EPUB) pero no edita codigo ni ofrece visores para JSON/YAML. **Dokos** une en una sola app ligera: Markdown de calidad, visores especializados para 30+ formatos, edicion tipo VS Code y comparacion de archivos, sin depender de extensiones ni suscripciones.
+
+---
+
 ## Funcionalidades clave de un vistazo
 
-- 18+ formatos de archivo soportados
+- 30+ formatos de archivo soportados
 - Editor basado en Monaco (motor de VS Code)
 - Markdown con LaTeX, Mermaid, GFM y 10+ plugins
-- Visores especializados por tipo de archivo
+- 17 visores especializados por tipo de archivo
 - Sistema de pestanas con sesiones persistentes
 - Busqueda global con regex
 - Comparacion de archivos (Diff)
 - 8 temas incluidos + personalizacion completa
-- 9 idiomas
+- 16 idiomas
 - Gestion de proyectos con favoritos e historial
 - Autoguardado inteligente
 - Arbol de archivos con menu contextual completo

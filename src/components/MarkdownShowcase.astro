@@ -1,0 +1,174 @@
+---
+import Icon from './Icon.astro';
+---
+
+<section class="py-24" id="markdown-showcase">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Option Label -->
+    <div class="text-center mb-8">
+      <span class="inline-block bg-primary/20 text-primary border border-primary/30 rounded-full px-4 py-1 text-sm font-bold tracking-wider uppercase">Opción 1 — Markdown Showcase</span>
+    </div>
+
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">Markdown como nunca lo viste</h2>
+      <p class="text-slate-400 max-w-2xl mx-auto">No es solo un editor. Es un entorno completo de documentación con diagramas, fórmulas, alertas y vista previa en tiempo real.</p>
+    </div>
+
+    <!-- Fake rendered document -->
+    <div class="max-w-4xl mx-auto">
+      <div class="bg-surface-dark border border-slate-800 rounded-2xl overflow-hidden">
+        <!-- Window chrome -->
+        <div class="flex items-center gap-2 px-4 py-3 bg-[#0b0f19] border-b border-slate-800">
+          <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+          <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+          <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+          <span class="ml-3 text-xs text-slate-500 font-mono">README.md — Dokos</span>
+          <div class="ml-auto flex items-center gap-2">
+            <span class="text-[10px] text-slate-600 bg-slate-800 px-2 py-0.5 rounded">Preview</span>
+            <span class="text-[10px] text-primary bg-primary/15 px-2 py-0.5 rounded border border-primary/30">Split</span>
+          </div>
+        </div>
+
+        <!-- Document body -->
+        <div class="p-6 sm:p-8 space-y-6">
+          <!-- Title -->
+          <div>
+            <h3 class="text-2xl font-bold text-white mb-1">Guía de Arquitectura</h3>
+            <div class="flex items-center gap-3 text-xs text-slate-500">
+              <span>Última edición: hace 2 min</span>
+              <span class="w-1 h-1 rounded-full bg-slate-700"></span>
+              <span>Autoguardado activado</span>
+            </div>
+          </div>
+
+          <!-- Paragraph -->
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Este documento describe la arquitectura del sistema de procesamiento de datos. El flujo principal sigue el patrón <code class="text-primary bg-primary/10 px-1.5 py-0.5 rounded text-xs">Producer → Queue → Consumer</code> para garantizar la escalabilidad.
+          </p>
+
+          <!-- Mermaid Diagram -->
+          <div class="bg-[#0b0f19] rounded-xl border border-slate-700 p-6">
+            <div class="flex items-center gap-2 mb-4">
+              <Icon name="schema" size="text-sm" class="text-primary" />
+              <span class="text-xs text-slate-500 font-mono">mermaid</span>
+            </div>
+            <div class="flex items-center justify-center gap-3 sm:gap-6 py-4">
+              <div class="flex flex-col items-center gap-1">
+                <div class="w-20 sm:w-24 h-10 rounded-lg bg-primary/20 border border-primary/40 flex items-center justify-center">
+                  <span class="text-xs text-primary font-medium">Producer</span>
+                </div>
+              </div>
+              <svg class="w-8 h-4 text-slate-600" viewBox="0 0 32 16"><path d="M0 8h24M24 8l-6-6M24 8l-6 6" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+              <div class="flex flex-col items-center gap-1">
+                <div class="w-20 sm:w-24 h-10 rounded-lg bg-yellow-500/20 border border-yellow-500/40 flex items-center justify-center">
+                  <span class="text-xs text-yellow-400 font-medium">Queue</span>
+                </div>
+              </div>
+              <svg class="w-8 h-4 text-slate-600" viewBox="0 0 32 16"><path d="M0 8h24M24 8l-6-6M24 8l-6 6" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+              <div class="flex flex-col items-center gap-1">
+                <div class="w-20 sm:w-24 h-10 rounded-lg bg-green-500/20 border border-green-500/40 flex items-center justify-center">
+                  <span class="text-xs text-green-400 font-medium">Consumer</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- LaTeX formula -->
+          <div class="bg-[#0b0f19] rounded-xl border border-slate-700 p-5">
+            <div class="flex items-center gap-2 mb-3">
+              <Icon name="functions" size="text-sm" class="text-primary" />
+              <span class="text-xs text-slate-500 font-mono">latex</span>
+            </div>
+            <div class="text-center py-3">
+              <span class="text-lg sm:text-xl text-slate-300 font-serif italic tracking-wide">
+                P(A|B) = <span class="inline-block border-b border-slate-500 pb-0.5 mx-1">P(B|A) · P(A)</span> <span class="text-slate-500">/</span> P(B)
+              </span>
+            </div>
+            <p class="text-center text-xs text-slate-600 mt-2">Teorema de Bayes — renderizado con KaTeX</p>
+          </div>
+
+          <!-- GitHub Alerts -->
+          <div class="space-y-3">
+            <!-- NOTE -->
+            <div class="rounded-lg border-l-4 border-blue-500 bg-blue-500/5 p-4">
+              <div class="flex items-center gap-2 mb-1">
+                <Icon name="info" size="text-sm" class="text-blue-400" />
+                <span class="text-sm font-semibold text-blue-400">Note</span>
+              </div>
+              <p class="text-sm text-slate-400">El throughput máximo depende de la configuración del broker. Consulta la sección de tuning para más detalles.</p>
+            </div>
+
+            <!-- WARNING -->
+            <div class="rounded-lg border-l-4 border-yellow-500 bg-yellow-500/5 p-4">
+              <div class="flex items-center gap-2 mb-1">
+                <Icon name="warning" size="text-sm" class="text-yellow-400" />
+                <span class="text-sm font-semibold text-yellow-400">Warning</span>
+              </div>
+              <p class="text-sm text-slate-400">No uses más de 50 workers en paralelo sin ajustar los límites de memoria del sistema.</p>
+            </div>
+
+            <!-- TIP -->
+            <div class="rounded-lg border-l-4 border-green-500 bg-green-500/5 p-4">
+              <div class="flex items-center gap-2 mb-1">
+                <Icon name="lightbulb" size="text-sm" class="text-green-400" />
+                <span class="text-sm font-semibold text-green-400">Tip</span>
+              </div>
+              <p class="text-sm text-slate-400">Activa el modo <code class="bg-slate-800 px-1 rounded text-xs text-green-300">--batch</code> para procesar archivos grandes hasta 10x más rápido.</p>
+            </div>
+          </div>
+
+          <!-- Table -->
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-slate-700">
+                  <th class="text-left py-2 px-3 text-slate-400 font-medium">Componente</th>
+                  <th class="text-left py-2 px-3 text-slate-400 font-medium">Latencia</th>
+                  <th class="text-left py-2 px-3 text-slate-400 font-medium">Estado</th>
+                </tr>
+              </thead>
+              <tbody class="text-slate-300">
+                <tr class="border-b border-slate-800">
+                  <td class="py-2 px-3">API Gateway</td>
+                  <td class="py-2 px-3 font-mono text-xs">12ms</td>
+                  <td class="py-2 px-3"><span class="text-green-400 text-xs">● Activo</span></td>
+                </tr>
+                <tr class="border-b border-slate-800">
+                  <td class="py-2 px-3">Message Queue</td>
+                  <td class="py-2 px-3 font-mono text-xs">3ms</td>
+                  <td class="py-2 px-3"><span class="text-green-400 text-xs">● Activo</span></td>
+                </tr>
+                <tr>
+                  <td class="py-2 px-3">Worker Pool</td>
+                  <td class="py-2 px-3 font-mono text-xs">45ms</td>
+                  <td class="py-2 px-3"><span class="text-yellow-400 text-xs">● Escalando</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Task list -->
+          <div class="space-y-2">
+            <h4 class="text-white font-medium text-sm">Checklist de deploy</h4>
+            <label class="flex items-center gap-2 text-sm text-slate-400">
+              <div class="w-4 h-4 rounded border border-green-500 bg-green-500/20 flex items-center justify-center">
+                <Icon name="check" size="text-xs" class="text-green-400" />
+              </div>
+              Tests unitarios pasando
+            </label>
+            <label class="flex items-center gap-2 text-sm text-slate-400">
+              <div class="w-4 h-4 rounded border border-green-500 bg-green-500/20 flex items-center justify-center">
+                <Icon name="check" size="text-xs" class="text-green-400" />
+              </div>
+              Variables de entorno configuradas
+            </label>
+            <label class="flex items-center gap-2 text-sm text-slate-400">
+              <div class="w-4 h-4 rounded border border-slate-600 bg-slate-800"></div>
+              Revisión de seguridad completada
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

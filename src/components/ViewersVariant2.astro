@@ -1,0 +1,126 @@
+---
+/**
+ * VARIANT 2 — "Category Columns with Highlight Cards"
+ * Los viewers agrupados en 4 columnas por categoría (Documentos, Datos, Código, Utilidades).
+ * Cada viewer tiene un mini-card con icono + feature highlight.
+ * Estilo más compacto y organizado, con un hero-viewer destacado arriba.
+ */
+import Icon from './Icon.astro';
+import type { Translations } from '../i18n/utils';
+
+interface Props {
+  t: Translations;
+}
+
+const { t } = Astro.props;
+
+const categories = [
+  {
+    title: t.viewers.catDocuments,
+    icon: 'description',
+    color: 'text-blue-400',
+    bgColor: 'bg-blue-500/10',
+    borderColor: 'border-blue-500/30',
+    viewers: [
+      { icon: 'edit_note', name: t.viewers.markdownName, highlight: t.viewers.markdownHighlight, formats: '.md' },
+      { icon: 'picture_as_pdf', name: t.viewers.pdfName, highlight: t.viewers.pdfHighlight, formats: '.pdf' },
+      { icon: 'menu_book', name: t.viewers.epubName, highlight: t.viewers.epubHighlight, formats: '.epub' },
+      { icon: 'language', name: t.viewers.htmlName, highlight: t.viewers.htmlHighlight, formats: '.html' },
+      { icon: 'image', name: t.viewers.imageName, highlight: t.viewers.imageHighlight, formats: '.png .jpg .gif' },
+      { icon: 'draw', name: t.viewers.svgName, highlight: t.viewers.svgHighlight, formats: '.svg' },
+    ],
+  },
+  {
+    title: t.viewers.catData,
+    icon: 'database',
+    color: 'text-yellow-400',
+    bgColor: 'bg-yellow-500/10',
+    borderColor: 'border-yellow-500/30',
+    viewers: [
+      { icon: 'data_object', name: t.viewers.jsonName, highlight: t.viewers.jsonHighlight, formats: '.json' },
+      { icon: 'account_tree', name: t.viewers.yamlName, highlight: t.viewers.yamlHighlight, formats: '.yaml' },
+      { icon: 'settings', name: t.viewers.tomlName, highlight: t.viewers.tomlHighlight, formats: '.toml' },
+      { icon: 'tune', name: t.viewers.iniName, highlight: t.viewers.iniHighlight, formats: '.ini .cfg' },
+      { icon: 'table_chart', name: t.viewers.csvName, highlight: t.viewers.csvHighlight, formats: '.csv' },
+      { icon: 'table_rows', name: t.viewers.tsvName, highlight: t.viewers.tsvHighlight, formats: '.tsv' },
+    ],
+  },
+  {
+    title: t.viewers.catCode,
+    icon: 'code',
+    color: 'text-green-400',
+    bgColor: 'bg-green-500/10',
+    borderColor: 'border-green-500/30',
+    viewers: [
+      { icon: 'science', name: t.viewers.notebookName, highlight: t.viewers.notebookHighlight, formats: '.ipynb' },
+      { icon: 'api', name: t.viewers.openapiName, highlight: t.viewers.openapiHighlight, formats: 'OpenAPI' },
+      { icon: 'code', name: t.viewers.codeName, highlight: t.viewers.codeHighlight, formats: '15+ langs' },
+    ],
+  },
+  {
+    title: t.viewers.catTools,
+    icon: 'build',
+    color: 'text-cyan-400',
+    bgColor: 'bg-cyan-500/10',
+    borderColor: 'border-cyan-500/30',
+    viewers: [
+      { icon: 'compare_arrows', name: t.viewers.diffName, highlight: t.viewers.diffHighlight, formats: t.viewers.diffFormats },
+      { icon: 'terminal', name: t.viewers.logName, highlight: t.viewers.logHighlight, formats: '.log' },
+    ],
+  },
+];
+---
+
+<section class="py-20 bg-surface-dark/30" id="viewers" aria-labelledby="viewers-heading">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <h2 id="viewers-heading" class="text-3xl sm:text-4xl font-bold text-white mb-4">
+        {t.viewers.heading}
+      </h2>
+      <p class="text-slate-400 text-lg max-w-2xl mx-auto">
+        {t.viewers.subheading}
+      </p>
+    </div>
+
+    <!-- Category columns -->
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+      {categories.map((cat) => (
+        <div class="space-y-3">
+          {/* Category header */}
+          <div class="flex items-center gap-2 mb-4">
+            <div class={`p-1.5 ${cat.bgColor} rounded-lg`}>
+              <Icon name={cat.icon} size="text-lg" class={cat.color} />
+            </div>
+            <h3 class="font-bold text-white">{cat.title}</h3>
+            <span class="text-xs text-slate-600 ml-auto">{cat.viewers.length}</span>
+          </div>
+
+          {/* Viewer list */}
+          {cat.viewers.map((v) => (
+            <div class={`group flex items-start gap-3 bg-surface-dark border border-slate-800 rounded-lg p-3 hover:${cat.borderColor} transition-all duration-200`}>
+              <div class={`p-1.5 ${cat.bgColor} rounded-md flex-shrink-0 mt-0.5`}>
+                <Icon name={v.icon} size="text-base" class={cat.color} />
+              </div>
+              <div class="min-w-0">
+                <div class="flex items-center gap-2">
+                  <span class="text-sm font-medium text-white">{v.name}</span>
+                  <span class="text-[10px] font-mono text-slate-600 bg-slate-800 px-1.5 py-0.5 rounded">{v.formats}</span>
+                </div>
+                <p class="text-xs text-slate-500 mt-0.5 leading-relaxed">{v.highlight}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+
+    <!-- Bottom counter -->
+    <div class="text-center mt-12">
+      <span class="inline-flex items-center gap-2 bg-primary/10 border border-primary/30 text-primary px-4 py-2 rounded-full text-sm font-medium">
+        <Icon name="visibility" size="text-base" />
+        {t.viewers.countBadge}
+      </span>
+    </div>
+  </div>
+</section>

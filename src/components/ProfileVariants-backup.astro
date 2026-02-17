@@ -1,0 +1,267 @@
+---
+/**
+ * Backup de variantes de diseño para perfiles (sin la Variante 3 que se usa en Profiles.astro).
+ * Variante 1: Bento Grid Layout
+ * Variante 2: Interactive Cards
+ * Variante 4: Feature Columns
+ */
+import Icon from './Icon.astro';
+import type { Translations } from '../i18n/utils';
+
+interface Props {
+  t: Translations;
+}
+
+const { t } = Astro.props;
+
+const profiles = [
+  {
+    icon: 'code',
+    iconColor: 'text-blue-400',
+    iconBg: 'bg-blue-500/10',
+    borderColor: 'border-blue-500/30',
+    glowColor: 'shadow-[0_0_30px_-5px_rgba(96,165,250,0.3)]',
+    gradientFrom: 'from-blue-500/10',
+    accentColor: 'bg-blue-500',
+    accentText: 'text-blue-400',
+    title: t.profiles.developersTitle,
+    description: t.profiles.developersDesc,
+  },
+  {
+    icon: 'cloud',
+    iconColor: 'text-purple-400',
+    iconBg: 'bg-purple-500/10',
+    borderColor: 'border-purple-500/30',
+    glowColor: 'shadow-[0_0_30px_-5px_rgba(168,85,247,0.3)]',
+    gradientFrom: 'from-purple-500/10',
+    accentColor: 'bg-purple-500',
+    accentText: 'text-purple-400',
+    title: t.profiles.devopsTitle,
+    description: t.profiles.devopsDesc,
+  },
+  {
+    icon: 'edit_note',
+    iconColor: 'text-green-400',
+    iconBg: 'bg-green-500/10',
+    borderColor: 'border-green-500/30',
+    glowColor: 'shadow-[0_0_30px_-5px_rgba(74,222,128,0.3)]',
+    gradientFrom: 'from-green-500/10',
+    accentColor: 'bg-green-500',
+    accentText: 'text-green-400',
+    title: t.profiles.writersTitle,
+    description: t.profiles.writersDesc,
+  },
+  {
+    icon: 'ssid_chart',
+    iconColor: 'text-orange-400',
+    iconBg: 'bg-orange-500/10',
+    borderColor: 'border-orange-500/30',
+    glowColor: 'shadow-[0_0_30px_-5px_rgba(251,146,60,0.3)]',
+    gradientFrom: 'from-orange-500/10',
+    accentColor: 'bg-orange-500',
+    accentText: 'text-orange-400',
+    title: t.profiles.dataTitle,
+    description: t.profiles.dataDesc,
+  },
+];
+---
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- VARIANTE 1: Bento Grid Layout                          -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="py-16 bg-surface-dark/30">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-bold text-center text-white mb-12">Bento Grid Layout</h2>
+
+    <div class="bento-grid">
+      {profiles.map((profile, i) => (
+        <div class={`bento-card bento-card-${i} group relative bg-surface-dark rounded-2xl border border-slate-800 overflow-hidden hover:${profile.borderColor} transition-all duration-500 hover:${profile.glowColor}`}>
+          <div class={`absolute inset-0 bg-gradient-to-br ${profile.gradientFrom} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`} aria-hidden="true"></div>
+          <div class="relative z-10 p-6 lg:p-8 h-full flex flex-col">
+            <div class={`w-14 h-14 ${profile.iconBg} rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}>
+              <Icon name={profile.icon} class={`${profile.iconColor} text-2xl`} size="text-2xl" />
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3">{profile.title}</h3>
+            <p class="text-slate-400 text-sm leading-relaxed flex-1">{profile.description}</p>
+            <div class={`mt-4 h-1 w-12 ${profile.accentColor} rounded-full opacity-50 group-hover:w-full group-hover:opacity-100 transition-all duration-500`}></div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- VARIANTE 2: Interactive Cards                          -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="py-16 bg-surface-dark/30">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-bold text-center text-white mb-12">Interactive Cards</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {profiles.map((profile) => (
+        <div class="interactive-card group relative bg-surface-dark rounded-2xl overflow-hidden border border-slate-800 hover:border-slate-600 transition-all duration-300 hover:-translate-y-2">
+          <div class={`h-1 ${profile.accentColor} w-full`}></div>
+          <div class="absolute inset-0 dots-pattern opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true"></div>
+          <div class="relative z-10 p-6">
+            <div class={`w-16 h-16 ${profile.iconBg} rounded-2xl flex items-center justify-center mb-5 icon-pulse`}>
+              <Icon name={profile.icon} class={`${profile.iconColor}`} size="text-3xl" />
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2">{profile.title}</h3>
+            <p class="text-slate-400 text-sm leading-relaxed mb-4">{profile.description}</p>
+            <div class="overflow-hidden max-h-0 group-hover:max-h-20 transition-all duration-500 ease-in-out">
+              <div class={`flex items-center gap-2 pt-3 border-t border-slate-700/50 ${profile.accentText}`}>
+                <Icon name="arrow_forward" size="text-sm" class={profile.accentText} />
+                <span class="text-xs font-medium">Learn more</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- VARIANTE 4: Feature Columns                           -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="py-16 bg-surface-dark/30">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-bold text-center text-white mb-12">Feature Columns</h2>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <!-- Left: Decorative Illustration -->
+      <div class="relative hidden lg:flex items-center justify-center" aria-hidden="true">
+        <svg viewBox="0 0 400 400" class="w-full max-w-sm opacity-80">
+          <!-- Outer ring -->
+          <circle cx="200" cy="200" r="160" fill="none" stroke="#1e293b" stroke-width="1" stroke-dasharray="8 4" class="spin-slow" />
+          <circle cx="200" cy="200" r="120" fill="none" stroke="#334155" stroke-width="0.5" class="spin-slow-reverse" />
+
+          <!-- Center hub -->
+          <circle cx="200" cy="200" r="40" fill="#151b2b" stroke="#334155" stroke-width="1.5" />
+          <text x="200" y="206" text-anchor="middle" fill="#94a3b8" font-size="11" font-family="Inter">Dokos</text>
+
+          <!-- Node: Developers (top) -->
+          <circle cx="200" cy="60" r="24" fill="#151b2b" stroke="#3b82f6" stroke-width="1.5" class="node-float" />
+          <line x1="200" y1="84" x2="200" y2="160" stroke="#3b82f6" stroke-width="1" opacity="0.3" />
+          <text x="200" y="65" text-anchor="middle" fill="#60a5fa" font-size="18" font-family="Material Symbols Outlined">code</text>
+
+          <!-- Node: DevOps (right) -->
+          <circle cx="340" cy="200" r="24" fill="#151b2b" stroke="#a855f7" stroke-width="1.5" class="node-float-delayed" />
+          <line x1="316" y1="200" x2="240" y2="200" stroke="#a855f7" stroke-width="1" opacity="0.3" />
+          <text x="340" y="205" text-anchor="middle" fill="#c084fc" font-size="18" font-family="Material Symbols Outlined">cloud</text>
+
+          <!-- Node: Writers (bottom) -->
+          <circle cx="200" cy="340" r="24" fill="#151b2b" stroke="#22c55e" stroke-width="1.5" class="node-float" />
+          <line x1="200" y1="316" x2="200" y2="240" stroke="#22c55e" stroke-width="1" opacity="0.3" />
+          <text x="200" y="345" text-anchor="middle" fill="#4ade80" font-size="18" font-family="Material Symbols Outlined">edit_note</text>
+
+          <!-- Node: Data (left) -->
+          <circle cx="60" cy="200" r="24" fill="#151b2b" stroke="#f97316" stroke-width="1.5" class="node-float-delayed" />
+          <line x1="84" y1="200" x2="160" y2="200" stroke="#f97316" stroke-width="1" opacity="0.3" />
+          <text x="60" y="205" text-anchor="middle" fill="#fb923c" font-size="18" font-family="Material Symbols Outlined">ssid_chart</text>
+        </svg>
+      </div>
+
+      <!-- Right: Profile list -->
+      <div class="relative">
+        <div class="absolute left-7 top-4 bottom-4 w-px bg-gradient-to-b from-blue-500/50 via-purple-500/50 via-green-500/50 to-orange-500/50 hidden sm:block" aria-hidden="true"></div>
+
+        <div class="space-y-6">
+          {profiles.map((profile) => (
+            <div class="group flex items-start gap-5 relative">
+              <div class={`relative z-10 w-14 h-14 ${profile.iconBg} rounded-xl flex items-center justify-center flex-shrink-0 border ${profile.borderColor} group-hover:scale-110 transition-transform duration-300`}>
+                <Icon name={profile.icon} class={profile.iconColor} size="text-2xl" />
+              </div>
+              <div class="flex-1 pb-2">
+                <h3 class="text-lg font-bold text-white mb-1 group-hover:text-white/90">{profile.title}</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">{profile.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Bento Grid */
+  .bento-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .bento-grid {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: auto auto;
+    }
+    .bento-card-0 {
+      grid-column: span 1;
+      grid-row: span 1;
+    }
+    .bento-card-3 {
+      grid-column: span 1;
+      grid-row: span 1;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .bento-grid {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto;
+    }
+    .bento-card-0 {
+      grid-column: span 2;
+    }
+    .bento-card-3 {
+      grid-column: span 2;
+    }
+  }
+
+  /* Interactive Cards - dots pattern */
+  .dots-pattern {
+    background-image: radial-gradient(circle, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+    background-size: 16px 16px;
+  }
+
+  /* Icon pulse animation */
+  .icon-pulse {
+    animation: pulse-subtle 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse-subtle {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  /* Spinning rings for Feature Columns SVG */
+  .spin-slow {
+    animation: spin 30s linear infinite;
+    transform-origin: 200px 200px;
+  }
+  .spin-slow-reverse {
+    animation: spin 25s linear infinite reverse;
+    transform-origin: 200px 200px;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* Floating nodes */
+  .node-float {
+    animation: node-bob 5s ease-in-out infinite;
+  }
+  .node-float-delayed {
+    animation: node-bob 5s ease-in-out infinite 1.5s;
+  }
+
+  @keyframes node-bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+</style>

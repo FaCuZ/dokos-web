@@ -30,10 +30,10 @@ const homePath = `${getLocalePath(locale)}/`;
         </a>
 
         <div class="hidden md:flex items-center space-x-8">
-          <a class="nav-link relative text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors" href="#formats">{t.navbar.formats}</a>
-          <a class="nav-link relative text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors" href="#visual">{t.navbar.visual}</a>
-          <a class="nav-link relative text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors" href="#project">{t.navbar.project}</a>
-          <a class="nav-link relative text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors" href="#profiles">{t.navbar.profiles}</a>
+          <a class="nav-link relative text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors" href={`${homePath}#viewers`}>{t.navbar.formats}</a>
+          <a class="nav-link relative text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors" href={`${homePath}#features`}>{t.navbar.visual}</a>
+          <a class="nav-link relative text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors" href={`${homePath}#comparison`}>{t.navbar.project}</a>
+          <a class="nav-link relative text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors" href={`${homePath}#profiles`}>{t.navbar.profiles}</a>
         </div>
 
         <div class="flex items-center gap-3">
@@ -96,10 +96,10 @@ const homePath = `${getLocalePath(locale)}/`;
       style="max-height: 0; opacity: 0;"
     >
       <div class="px-4 py-4 space-y-3">
-        <a class="block text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="#formats">{t.navbar.formats}</a>
-        <a class="block text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="#visual">{t.navbar.visual}</a>
-        <a class="block text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="#project">{t.navbar.project}</a>
-        <a class="block text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="#profiles">{t.navbar.profiles}</a>
+        <a class="block text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href={`${homePath}#viewers`}>{t.navbar.formats}</a>
+        <a class="block text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href={`${homePath}#features`}>{t.navbar.visual}</a>
+        <a class="block text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href={`${homePath}#comparison`}>{t.navbar.project}</a>
+        <a class="block text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href={`${homePath}#profiles`}>{t.navbar.profiles}</a>
 
         <!-- Language Switcher (mobile) -->
         <div class="pt-3 border-t border-slate-200 dark:border-slate-700 space-y-2">

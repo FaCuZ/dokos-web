@@ -1,0 +1,240 @@
+---
+/**
+ * Viewers — Tabs por categoría con animación de entrada.
+ * Cada tab muestra los viewers en cards con descripción y badge de formatos.
+ */
+import Icon from './Icon.astro';
+import type { Translations } from '../i18n/utils';
+
+interface Props {
+  t: Translations;
+}
+
+const { t } = Astro.props;
+
+const tabs = [
+  {
+    id: 'docs',
+    label: t.viewers.catDocuments,
+    icon: 'description',
+    color: 'text-blue-400',
+    bgColor: 'bg-blue-500/10',
+    borderColor: 'border-blue-500/30',
+    viewers: [
+      { icon: 'edit_note', name: t.viewers.markdownName, desc: t.viewers.markdownDesc, formats: '.md, .markdown, .mdown', color: 'text-blue-400', bgColor: 'bg-blue-500/10' },
+      { icon: 'picture_as_pdf', name: t.viewers.pdfName, desc: t.viewers.pdfDesc, formats: '.pdf', color: 'text-red-400', bgColor: 'bg-red-500/10' },
+      { icon: 'menu_book', name: t.viewers.epubName, desc: t.viewers.epubDesc, formats: '.epub', color: 'text-purple-400', bgColor: 'bg-purple-500/10' },
+      { icon: 'language', name: t.viewers.htmlName, desc: t.viewers.htmlDesc, formats: '.html, .htm', color: 'text-orange-400', bgColor: 'bg-orange-500/10' },
+      { icon: 'image', name: t.viewers.imageName, desc: t.viewers.imageDesc, formats: '.png, .jpg, .gif, .webp', color: 'text-cyan-400', bgColor: 'bg-cyan-500/10' },
+      { icon: 'draw', name: t.viewers.svgName, desc: t.viewers.svgDesc, formats: '.svg', color: 'text-indigo-400', bgColor: 'bg-indigo-500/10' },
+    ],
+  },
+  {
+    id: 'data',
+    label: t.viewers.catData,
+    icon: 'database',
+    color: 'text-yellow-400',
+    bgColor: 'bg-yellow-500/10',
+    borderColor: 'border-yellow-500/30',
+    viewers: [
+      { icon: 'data_object', name: t.viewers.jsonName, desc: t.viewers.jsonDesc, formats: '.json', color: 'text-yellow-400', bgColor: 'bg-yellow-500/10' },
+      { icon: 'account_tree', name: t.viewers.yamlName, desc: t.viewers.yamlDesc, formats: '.yaml, .yml', color: 'text-pink-400', bgColor: 'bg-pink-500/10' },
+      { icon: 'settings', name: t.viewers.tomlName, desc: t.viewers.tomlDesc, formats: '.toml', color: 'text-amber-400', bgColor: 'bg-amber-500/10' },
+      { icon: 'tune', name: t.viewers.iniName, desc: t.viewers.iniDesc, formats: '.ini, .cfg, .conf', color: 'text-slate-400', bgColor: 'bg-slate-500/10' },
+      { icon: 'table_chart', name: t.viewers.csvName, desc: t.viewers.csvDesc, formats: '.csv', color: 'text-green-400', bgColor: 'bg-green-500/10' },
+      { icon: 'table_rows', name: t.viewers.tsvName, desc: t.viewers.tsvDesc, formats: '.tsv, .tab', color: 'text-teal-400', bgColor: 'bg-teal-500/10' },
+    ],
+  },
+  {
+    id: 'code',
+    label: t.viewers.catCode,
+    icon: 'code',
+    color: 'text-green-400',
+    bgColor: 'bg-green-500/10',
+    borderColor: 'border-green-500/30',
+    viewers: [
+      { icon: 'science', name: t.viewers.notebookName, desc: t.viewers.notebookDesc, formats: '.ipynb', color: 'text-orange-500', bgColor: 'bg-orange-500/10' },
+      { icon: 'api', name: t.viewers.openapiName, desc: t.viewers.openapiDesc, formats: 'OpenAPI / Swagger', color: 'text-green-500', bgColor: 'bg-green-500/10' },
+      { icon: 'code', name: t.viewers.codeName, desc: t.viewers.codeDesc, formats: t.viewers.codeFormats, color: 'text-violet-400', bgColor: 'bg-violet-500/10' },
+      { icon: 'compare_arrows', name: t.viewers.diffName, desc: t.viewers.diffDesc, formats: t.viewers.diffFormats, color: 'text-blue-500', bgColor: 'bg-blue-500/10' },
+      { icon: 'terminal', name: t.viewers.logName, desc: t.viewers.logDesc, formats: '.log', color: 'text-gray-400', bgColor: 'bg-gray-500/10' },
+    ],
+  },
+];
+---
+
+<section class="py-20 bg-surface-dark/30" id="viewers" aria-labelledby="viewers-heading">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <h2 id="viewers-heading" class="text-3xl sm:text-4xl font-bold text-white mb-4">
+        {t.viewers.heading}
+      </h2>
+      <p class="text-slate-400 text-lg max-w-2xl mx-auto">
+        {t.viewers.subheading}
+      </p>
+    </div>
+
+    <!-- Tab bar -->
+    <div class="flex justify-center mb-10">
+      <div
+        class="inline-flex gap-1 bg-surface-dark border border-slate-800 rounded-xl p-1.5 overflow-x-auto scrollbar-hide"
+        role="tablist"
+        aria-label={t.viewers.heading}
+      >
+        {tabs.map((tab, index) => (
+          <button
+            role="tab"
+            aria-selected={index === 0 ? 'true' : 'false'}
+            aria-controls={`viewers-panel-${tab.id}`}
+            id={`viewers-tab-${tab.id}`}
+            data-viewers-tab={tab.id}
+            class:list={[
+              'viewers-tab flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 whitespace-nowrap',
+              index === 0
+                ? `${tab.bgColor} ${tab.color} ${tab.borderColor} border`
+                : 'text-slate-400 hover:text-white border border-transparent',
+            ]}
+          >
+            <Icon name={tab.icon} size="text-base" />
+            {tab.label}
+            <span class:list={[
+              'text-[10px] px-1.5 py-0.5 rounded-full font-mono',
+              index === 0 ? 'bg-white/10' : 'bg-slate-800',
+            ]} data-tab-count>
+              {tab.viewers.length}
+            </span>
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- Tab panels -->
+    {tabs.map((tab, index) => (
+      <div
+        role="tabpanel"
+        id={`viewers-panel-${tab.id}`}
+        aria-labelledby={`viewers-tab-${tab.id}`}
+        data-viewers-panel={tab.id}
+        class:list={[
+          'viewers-panel',
+          index === 0 ? 'block' : 'hidden',
+        ]}
+      >
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {tab.viewers.map((v) => (
+            <div class={`group bg-surface-dark border border-slate-800 rounded-xl p-5 hover:border-slate-600 transition-all duration-300`}>
+              <div class="flex items-start gap-3 mb-3">
+                <div class={`p-2 ${v.bgColor} rounded-lg flex-shrink-0`}>
+                  <Icon name={v.icon} class={v.color} />
+                </div>
+                <div>
+                  <h3 class="font-semibold text-white">{v.name}</h3>
+                  <span class="text-[11px] font-mono text-slate-500">{v.formats}</span>
+                </div>
+              </div>
+              <p class="text-sm text-slate-400 leading-relaxed">{v.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+
+    <!-- Bottom counter -->
+    <div class="text-center mt-12">
+      <span class="inline-flex items-center gap-2 bg-primary/10 border border-primary/30 text-primary px-4 py-2 rounded-full text-sm font-medium">
+        <Icon name="visibility" size="text-base" />
+        {t.viewers.countBadge}
+      </span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .viewers-panel {
+    animation: viewersFadeIn 0.35s ease-out;
+  }
+
+  @keyframes viewersFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelectorAll<HTMLButtonElement>('[data-viewers-tab]');
+    const panels = document.querySelectorAll<HTMLDivElement>('[data-viewers-panel]');
+
+    if (!tabs.length || !panels.length) return;
+
+    const tabStyles: Record<string, { bgColor: string; color: string; borderColor: string }> = {
+      docs:  { bgColor: 'bg-blue-500/10',   color: 'text-blue-400',   borderColor: 'border-blue-500/30' },
+      data:  { bgColor: 'bg-yellow-500/10',  color: 'text-yellow-400', borderColor: 'border-yellow-500/30' },
+      code:  { bgColor: 'bg-green-500/10',   color: 'text-green-400',  borderColor: 'border-green-500/30' },
+    };
+
+    const allBg = Object.values(tabStyles).map(s => s.bgColor);
+    const allColor = Object.values(tabStyles).map(s => s.color);
+    const allBorder = Object.values(tabStyles).map(s => s.borderColor);
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const targetId = tab.dataset.viewersTab!;
+        const style = tabStyles[targetId];
+        if (!style) return;
+
+        // Reset all tabs
+        tabs.forEach((t) => {
+          t.setAttribute('aria-selected', 'false');
+          t.classList.remove(...allBg, ...allColor, ...allBorder, 'border');
+          t.classList.add('text-slate-400', 'border', 'border-transparent');
+          const count = t.querySelector('[data-tab-count]');
+          if (count) {
+            count.classList.remove('bg-white/10');
+            count.classList.add('bg-slate-800');
+          }
+        });
+
+        // Activate clicked tab
+        tab.setAttribute('aria-selected', 'true');
+        tab.classList.remove('text-slate-400', 'border-transparent');
+        tab.classList.add(style.bgColor, style.color, style.borderColor);
+        const count = tab.querySelector('[data-tab-count]');
+        if (count) {
+          count.classList.remove('bg-slate-800');
+          count.classList.add('bg-white/10');
+        }
+
+        // Switch panels
+        panels.forEach((panel) => {
+          const panelId = panel.dataset.viewersPanel;
+          if (panelId === targetId) {
+            panel.classList.remove('hidden');
+            panel.classList.add('block');
+            panel.style.animation = 'none';
+            panel.offsetHeight;
+            panel.style.animation = '';
+          } else {
+            panel.classList.add('hidden');
+            panel.classList.remove('block');
+          }
+        });
+      });
+    });
+  });
+</script>

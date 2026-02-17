@@ -13,6 +13,7 @@ const profiles = [
     icon: 'code',
     iconColor: 'text-blue-400',
     iconBg: 'bg-blue-500/10',
+    accentColor: 'bg-blue-500',
     title: t.profiles.developersTitle,
     description: t.profiles.developersDesc,
   },
@@ -20,6 +21,7 @@ const profiles = [
     icon: 'cloud',
     iconColor: 'text-purple-400',
     iconBg: 'bg-purple-500/10',
+    accentColor: 'bg-purple-500',
     title: t.profiles.devopsTitle,
     description: t.profiles.devopsDesc,
   },
@@ -27,6 +29,7 @@ const profiles = [
     icon: 'edit_note',
     iconColor: 'text-green-400',
     iconBg: 'bg-green-500/10',
+    accentColor: 'bg-green-500',
     title: t.profiles.writersTitle,
     description: t.profiles.writersDesc,
   },
@@ -34,6 +37,7 @@ const profiles = [
     icon: 'ssid_chart',
     iconColor: 'text-orange-400',
     iconBg: 'bg-orange-500/10',
+    accentColor: 'bg-orange-500',
     title: t.profiles.dataTitle,
     description: t.profiles.dataDesc,
   },
@@ -42,18 +46,73 @@ const profiles = [
 
 <section class="py-24 bg-surface-dark/30" id="profiles" aria-labelledby="profiles-heading">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 id="profiles-heading" class="text-3xl font-bold text-center text-white mb-12">{t.profiles.heading}</h2>
+    <h2 id="profiles-heading" class="text-3xl font-bold text-center text-white mb-16">{t.profiles.heading}</h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
       {profiles.map((profile) => (
-        <div class="bg-surface-dark p-6 rounded-xl border border-slate-800 hover:border-slate-600 transition-colors">
-          <div class={`w-12 h-12 ${profile.iconBg} rounded-full flex items-center justify-center mb-4`}>
-            <Icon name={profile.icon} class={profile.iconColor} />
+        <div class="group text-center">
+          <div class="relative mx-auto w-24 h-24 mb-6">
+            <div class={`absolute inset-0 rounded-full ${profile.iconBg} icon-glow-ring`} aria-hidden="true"></div>
+            <div class="absolute inset-1 rounded-full bg-surface-dark flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+              <Icon name={profile.icon} class={profile.iconColor} size="text-4xl" />
+            </div>
+            <div class={`particle particle-1 ${profile.accentColor}`} aria-hidden="true"></div>
+            <div class={`particle particle-2 ${profile.accentColor}`} aria-hidden="true"></div>
+            <div class={`particle particle-3 ${profile.accentColor}`} aria-hidden="true"></div>
           </div>
-          <h3 class="text-white font-bold mb-2">{profile.title}</h3>
-          <p class="text-slate-400 text-sm">{profile.description}</p>
+          <h3 class="text-lg font-bold text-white mb-3">{profile.title}</h3>
+          <p class="text-slate-400 text-sm leading-relaxed max-w-xs mx-auto">{profile.description}</p>
         </div>
       ))}
     </div>
   </div>
 </section>
+
+<style>
+  /* Icon glow ring */
+  .icon-glow-ring {
+    animation: glow-ring 4s ease-in-out infinite;
+  }
+
+  @keyframes glow-ring {
+    0%, 100% { box-shadow: 0 0 0 0 transparent; }
+    50% { box-shadow: 0 0 20px 2px rgba(148, 163, 184, 0.1); }
+  }
+
+  /* Floating particles */
+  .particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    opacity: 0;
+    animation: particle-float 4s ease-in-out infinite;
+  }
+
+  .particle-1 {
+    top: 10%;
+    left: 15%;
+    animation-delay: 0s;
+  }
+  .particle-2 {
+    top: 70%;
+    right: 10%;
+    animation-delay: 1.2s;
+  }
+  .particle-3 {
+    bottom: 5%;
+    left: 40%;
+    animation-delay: 2.4s;
+  }
+
+  @keyframes particle-float {
+    0%, 100% {
+      opacity: 0;
+      transform: translateY(0) scale(0.5);
+    }
+    50% {
+      opacity: 0.6;
+      transform: translateY(-12px) scale(1);
+    }
+  }
+</style>

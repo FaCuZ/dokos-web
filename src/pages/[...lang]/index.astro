@@ -1,49 +1,49 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Head from '../../components/Head.astro';
-import Navbar from '../../components/Navbar.astro';
-import Hero from '../../components/Hero.astro';
-import ToolConvergence from '../../components/ToolConvergence.astro';
-import Formats from '../../components/Formats.astro';
-import VisualFeatures from '../../components/VisualFeatures.astro';
-import Multitasking from '../../components/Multitasking.astro';
-import Profiles from '../../components/Profiles.astro';
-import Performance from '../../components/Performance.astro';
-import CtaFinal from '../../components/CtaFinal.astro';
-import Footer from '../../components/Footer.astro';
+import ToolConvergence from "../../components/ToolConvergence.astro";
+import ComparisonTable from "../../components/ComparisonTable.astro";
+import Performance from "../../components/Performance.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Features from "../../components/Features.astro";
+import Profiles from "../../components/Profiles.astro";
+import CtaFinal from "../../components/CtaFinal.astro";
+import Viewers from "../../components/Viewers.astro";
+import Footer from "../../components/Footer.astro";
+import Navbar from "../../components/Navbar.astro";
+import Hero from "../../components/Hero.astro";
+import Head from "../../components/Head.astro";
 import {
   getTranslations,
   getLocalePath,
   getAlternateLinks,
   ogLocales,
   type Locale,
-} from '../../i18n/utils';
+} from "../../i18n/utils";
 
 export function getStaticPaths() {
   return [
-    { params: { lang: undefined }, props: { locale: 'en' as Locale } },
-    { params: { lang: 'es' }, props: { locale: 'es' as Locale } },
-    { params: { lang: 'pt' }, props: { locale: 'pt' as Locale } },
-    { params: { lang: 'zh' }, props: { locale: 'zh' as Locale } },
-    { params: { lang: 'fr' }, props: { locale: 'fr' as Locale } },
-    { params: { lang: 'hi' }, props: { locale: 'hi' as Locale } },
-    { params: { lang: 'de' }, props: { locale: 'de' as Locale } },
-    { params: { lang: 'ja' }, props: { locale: 'ja' as Locale } },
-    { params: { lang: 'ru' }, props: { locale: 'ru' as Locale } },
-    { params: { lang: 'ko' }, props: { locale: 'ko' as Locale } },
+    { params: { lang: undefined }, props: { locale: "en" as Locale } },
+    { params: { lang: "es" }, props: { locale: "es" as Locale } },
+    { params: { lang: "pt" }, props: { locale: "pt" as Locale } },
+    { params: { lang: "zh" }, props: { locale: "zh" as Locale } },
+    { params: { lang: "fr" }, props: { locale: "fr" as Locale } },
+    { params: { lang: "hi" }, props: { locale: "hi" as Locale } },
+    { params: { lang: "de" }, props: { locale: "de" as Locale } },
+    { params: { lang: "ja" }, props: { locale: "ja" as Locale } },
+    { params: { lang: "ru" }, props: { locale: "ru" as Locale } },
+    { params: { lang: "ko" }, props: { locale: "ko" as Locale } },
   ];
 }
 
 const { locale } = Astro.props;
 const t = getTranslations(locale);
-const alternateLinks = getAlternateLinks('/');
+const alternateLinks = getAlternateLinks("/");
 const canonicalUrl = `https://dokos.app${getLocalePath(locale)}/`;
 
 const seo = {
   title: t.meta.title,
   description: t.meta.description,
   canonicalUrl,
-  ogImage: 'https://dokos.app/og-image.png',
+  ogImage: "https://dokos.app/og-image.png",
   ogLocale: ogLocales[locale],
   alternateLinks,
   locale,
@@ -56,9 +56,9 @@ const seo = {
 
   <Hero t={t} />
   <ToolConvergence t={t} />
-  <Formats t={t} />
-  <VisualFeatures t={t} />
-  <Multitasking t={t} />
+  <Viewers t={t} />
+  <Features t={t} />
+  <ComparisonTable t={t} />
   <Profiles t={t} />
   <Performance t={t} />
   <CtaFinal t={t} />

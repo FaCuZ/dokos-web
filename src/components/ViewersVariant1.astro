@@ -1,0 +1,209 @@
+---
+/**
+ * VARIANT 1 — "Viewer Showcase Grid"
+ * Grid de cards con icono, nombre del viewer, formatos que soporta y una mini-descripción.
+ * Diseño limpio tipo "feature grid" con hover effects y colores por categoría.
+ */
+import Icon from './Icon.astro';
+import type { Translations } from '../i18n/utils';
+
+interface Props {
+  t: Translations;
+}
+
+const { t } = Astro.props;
+
+const viewers = [
+  {
+    icon: 'edit_note',
+    name: t.viewers.markdownName,
+    formats: '.md, .markdown, .mdown',
+    description: t.viewers.markdownDesc,
+    color: 'text-blue-400',
+    bgColor: 'bg-blue-500/10',
+    borderHover: 'hover:border-blue-500/40',
+  },
+  {
+    icon: 'picture_as_pdf',
+    name: t.viewers.pdfName,
+    formats: '.pdf',
+    description: t.viewers.pdfDesc,
+    color: 'text-red-400',
+    bgColor: 'bg-red-500/10',
+    borderHover: 'hover:border-red-500/40',
+  },
+  {
+    icon: 'menu_book',
+    name: t.viewers.epubName,
+    formats: '.epub',
+    description: t.viewers.epubDesc,
+    color: 'text-purple-400',
+    bgColor: 'bg-purple-500/10',
+    borderHover: 'hover:border-purple-500/40',
+  },
+  {
+    icon: 'data_object',
+    name: t.viewers.jsonName,
+    formats: '.json',
+    description: t.viewers.jsonDesc,
+    color: 'text-yellow-400',
+    bgColor: 'bg-yellow-500/10',
+    borderHover: 'hover:border-yellow-500/40',
+  },
+  {
+    icon: 'account_tree',
+    name: t.viewers.yamlName,
+    formats: '.yaml, .yml',
+    description: t.viewers.yamlDesc,
+    color: 'text-pink-400',
+    bgColor: 'bg-pink-500/10',
+    borderHover: 'hover:border-pink-500/40',
+  },
+  {
+    icon: 'table_chart',
+    name: t.viewers.csvName,
+    formats: '.csv',
+    description: t.viewers.csvDesc,
+    color: 'text-green-400',
+    bgColor: 'bg-green-500/10',
+    borderHover: 'hover:border-green-500/40',
+  },
+  {
+    icon: 'table_rows',
+    name: t.viewers.tsvName,
+    formats: '.tsv, .tab',
+    description: t.viewers.tsvDesc,
+    color: 'text-teal-400',
+    bgColor: 'bg-teal-500/10',
+    borderHover: 'hover:border-teal-500/40',
+  },
+  {
+    icon: 'image',
+    name: t.viewers.imageName,
+    formats: '.png, .jpg, .gif, .webp, .bmp, .ico',
+    description: t.viewers.imageDesc,
+    color: 'text-cyan-400',
+    bgColor: 'bg-cyan-500/10',
+    borderHover: 'hover:border-cyan-500/40',
+  },
+  {
+    icon: 'language',
+    name: t.viewers.htmlName,
+    formats: '.html, .htm',
+    description: t.viewers.htmlDesc,
+    color: 'text-orange-400',
+    bgColor: 'bg-orange-500/10',
+    borderHover: 'hover:border-orange-500/40',
+  },
+  {
+    icon: 'settings',
+    name: t.viewers.tomlName,
+    formats: '.toml',
+    description: t.viewers.tomlDesc,
+    color: 'text-amber-400',
+    bgColor: 'bg-amber-500/10',
+    borderHover: 'hover:border-amber-500/40',
+  },
+  {
+    icon: 'tune',
+    name: t.viewers.iniName,
+    formats: '.ini, .cfg, .conf',
+    description: t.viewers.iniDesc,
+    color: 'text-slate-400',
+    bgColor: 'bg-slate-500/10',
+    borderHover: 'hover:border-slate-500/40',
+  },
+  {
+    icon: 'science',
+    name: t.viewers.notebookName,
+    formats: '.ipynb',
+    description: t.viewers.notebookDesc,
+    color: 'text-orange-500',
+    bgColor: 'bg-orange-500/10',
+    borderHover: 'hover:border-orange-500/40',
+  },
+  {
+    icon: 'terminal',
+    name: t.viewers.logName,
+    formats: '.log',
+    description: t.viewers.logDesc,
+    color: 'text-gray-400',
+    bgColor: 'bg-gray-500/10',
+    borderHover: 'hover:border-gray-500/40',
+  },
+  {
+    icon: 'draw',
+    name: t.viewers.svgName,
+    formats: '.svg',
+    description: t.viewers.svgDesc,
+    color: 'text-indigo-400',
+    bgColor: 'bg-indigo-500/10',
+    borderHover: 'hover:border-indigo-500/40',
+  },
+  {
+    icon: 'api',
+    name: t.viewers.openapiName,
+    formats: 'OpenAPI / Swagger',
+    description: t.viewers.openapiDesc,
+    color: 'text-green-500',
+    bgColor: 'bg-green-500/10',
+    borderHover: 'hover:border-green-500/40',
+  },
+  {
+    icon: 'compare_arrows',
+    name: t.viewers.diffName,
+    formats: t.viewers.diffFormats,
+    description: t.viewers.diffDesc,
+    color: 'text-blue-500',
+    bgColor: 'bg-blue-500/10',
+    borderHover: 'hover:border-blue-500/40',
+  },
+  {
+    icon: 'code',
+    name: t.viewers.codeName,
+    formats: t.viewers.codeFormats,
+    description: t.viewers.codeDesc,
+    color: 'text-violet-400',
+    bgColor: 'bg-violet-500/10',
+    borderHover: 'hover:border-violet-500/40',
+  },
+];
+---
+
+<section class="py-20 bg-surface-dark/30" id="viewers" aria-labelledby="viewers-heading">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 id="viewers-heading" class="text-3xl sm:text-4xl font-bold text-white mb-4">
+        {t.viewers.heading}
+      </h2>
+      <p class="text-slate-400 text-lg max-w-2xl mx-auto">
+        {t.viewers.subheading}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      {viewers.map((v) => (
+        <div class={`group bg-surface-dark border border-slate-800 rounded-xl p-5 ${v.borderHover} transition-all duration-300 hover:shadow-lg`}>
+          <div class="flex items-center gap-3 mb-3">
+            <div class={`p-2 ${v.bgColor} rounded-lg`}>
+              <Icon name={v.icon} class={v.color} />
+            </div>
+            <div>
+              <h3 class="font-semibold text-white text-sm">{v.name}</h3>
+              <span class="text-xs text-slate-500 font-mono">{v.formats}</span>
+            </div>
+          </div>
+          <p class="text-sm text-slate-400 leading-relaxed">{v.description}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Counter badge -->
+    <div class="text-center mt-10">
+      <span class="inline-flex items-center gap-2 bg-primary/10 border border-primary/30 text-primary px-4 py-2 rounded-full text-sm font-medium">
+        <Icon name="visibility" size="text-base" />
+        {t.viewers.countBadge}
+      </span>
+    </div>
+  </div>
+</section>

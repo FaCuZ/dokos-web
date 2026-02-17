@@ -1,0 +1,325 @@
+---
+import Icon from './Icon.astro';
+import type { Translations } from '../i18n/utils';
+
+interface Props {
+  t: Translations;
+}
+
+const { t } = Astro.props;
+
+const features = [
+  {
+    id: 'diff',
+    icon: 'compare_arrows',
+    title: t.featuresSection.diffTitle,
+    description: t.featuresSection.diffDesc,
+    why: t.featuresSection.diffWhy,
+    color: 'text-blue-400',
+    bgColor: 'bg-blue-500/10',
+    borderColor: 'border-blue-500/30',
+    glowColor: 'shadow-blue-500/20',
+    image: '/images/feat-1.png',
+  },
+  {
+    id: 'monaco',
+    icon: 'code',
+    title: t.featuresSection.monacoTitle,
+    description: t.featuresSection.monacoDesc,
+    why: t.featuresSection.monacoWhy,
+    color: 'text-violet-400',
+    bgColor: 'bg-violet-500/10',
+    borderColor: 'border-violet-500/30',
+    glowColor: 'shadow-violet-500/20',
+    image: '/images/feat-2.png',
+  },
+  {
+    id: 'search',
+    icon: 'search',
+    title: t.featuresSection.searchTitle,
+    description: t.featuresSection.searchDesc,
+    why: t.featuresSection.searchWhy,
+    color: 'text-amber-400',
+    bgColor: 'bg-amber-500/10',
+    borderColor: 'border-amber-500/30',
+    glowColor: 'shadow-amber-500/20',
+    image: '/images/feat-3.png',
+  },
+  {
+    id: 'archives',
+    icon: 'folder_zip',
+    title: t.featuresSection.archivesTitle,
+    description: t.featuresSection.archivesDesc,
+    why: t.featuresSection.archivesWhy,
+    color: 'text-orange-400',
+    bgColor: 'bg-orange-500/10',
+    borderColor: 'border-orange-500/30',
+    glowColor: 'shadow-orange-500/20',
+    image: '/images/feat-4.png',
+    imgClass: 'feature-img-sidebar',
+  },
+  {
+    id: 'sessions',
+    icon: 'restore',
+    title: t.featuresSection.sessionsTitle,
+    description: t.featuresSection.sessionsDesc,
+    why: t.featuresSection.sessionsWhy,
+    color: 'text-cyan-400',
+    bgColor: 'bg-cyan-500/10',
+    borderColor: 'border-cyan-500/30',
+    glowColor: 'shadow-cyan-500/20',
+    image: '/images/feat-5.png',
+  },
+];
+---
+
+<section class="py-24 relative overflow-hidden" id="features" aria-labelledby="features-heading">
+  <!-- Background decoration -->
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/5 blur-[120px]"></div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <h2 id="features-heading" class="text-3xl sm:text-4xl font-bold text-white mb-4">
+        {t.featuresSection.heading}
+      </h2>
+      <p class="text-slate-400 text-lg max-w-2xl mx-auto">
+        {t.featuresSection.subheading}
+      </p>
+    </div>
+
+    <!-- Interactive tabs layout -->
+    <div class="flex flex-col lg:flex-row gap-6">
+      <!-- Tab list (left side / top on mobile) -->
+      <div
+        class="lg:w-[280px] flex-shrink-0 flex lg:flex-col gap-2 overflow-x-auto lg:overflow-x-visible pb-2 lg:pb-0 scrollbar-hide"
+        role="tablist"
+        aria-label={t.featuresSection.heading}
+      >
+        {features.map((feat, index) => (
+          <button
+            role="tab"
+            aria-selected={index === 0 ? 'true' : 'false'}
+            aria-controls={`panel-${feat.id}`}
+            id={`tab-${feat.id}`}
+            data-feature-tab={feat.id}
+            class:list={[
+              'feature-tab group flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all duration-300 whitespace-nowrap lg:whitespace-normal min-w-[180px] lg:min-w-0 border',
+              index === 0
+                ? `${feat.bgColor} ${feat.borderColor} shadow-lg`
+                : 'border-transparent hover:bg-surface-dark hover:border-slate-700/50',
+            ]}
+          >
+            <div
+              class:list={[
+                'w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-300',
+                index === 0 ? `${feat.bgColor} ${feat.color}` : 'bg-slate-800 text-slate-400 group-hover:text-slate-300',
+              ]}
+              data-tab-icon
+            >
+              <Icon name={feat.icon} />
+            </div>
+            <span
+              class:list={[
+                'text-sm font-medium transition-colors duration-300',
+                index === 0 ? 'text-white' : 'text-slate-400 group-hover:text-slate-300',
+              ]}
+              data-tab-label
+            >
+              {feat.title}
+            </span>
+          </button>
+        ))}
+      </div>
+
+      <!-- Content panel (right side / bottom on mobile) -->
+      <div class="flex-1 min-w-0">
+        {features.map((feat, index) => (
+          <div
+            role="tabpanel"
+            id={`panel-${feat.id}`}
+            aria-labelledby={`tab-${feat.id}`}
+            data-feature-panel={feat.id}
+            class:list={[
+              'feature-panel rounded-2xl border bg-surface-dark overflow-hidden transition-all duration-500',
+              index === 0
+                ? `${feat.borderColor} opacity-100`
+                : 'border-slate-800 opacity-0 hidden',
+            ]}
+          >
+            <div class={`flex flex-col ${feat.image ? 'lg:flex-row' : ''}`}>
+              <!-- Text content -->
+              <div class={`p-8 lg:p-10 ${feat.image ? 'lg:w-1/2' : 'w-full'}`}>
+                <!-- Title row -->
+                <div class="flex items-center gap-4 mb-6">
+                  <div class={`w-12 h-12 rounded-xl ${feat.bgColor} flex items-center justify-center flex-shrink-0`}>
+                    <Icon name={feat.icon} size="text-2xl" class={feat.color} />
+                  </div>
+                  <div>
+                    <h3 class="text-xl lg:text-2xl font-bold text-white">{feat.title}</h3>
+                  </div>
+                </div>
+
+                <!-- Description -->
+                <p class="text-slate-300 text-base leading-relaxed mb-6">
+                  {feat.description}
+                </p>
+
+                <!-- Why it matters -->
+                <div class={`${feat.bgColor} ${feat.borderColor} border rounded-xl p-5`}>
+                  <div class="flex items-center gap-2 mb-2">
+                    <Icon name="lightbulb" size="text-lg" class={feat.color} />
+                    <span class={`text-sm font-semibold ${feat.color}`}>{t.featuresSection.whyItMatters}</span>
+                  </div>
+                  <p class="text-slate-300 text-sm leading-relaxed">
+                    {feat.why}
+                  </p>
+                </div>
+              </div>
+
+              {/* Screenshot */}
+              {feat.image && (
+                <div class="lg:w-1/2 relative overflow-hidden rounded-r-2xl">
+                  <div class="h-64 lg:h-full min-h-[280px] relative">
+                    <img
+                      src={feat.image}
+                      alt={feat.title}
+                      class={`absolute inset-0 w-full h-full object-cover ${feat.imgClass || 'feature-img'}`}
+                      loading="lazy"
+                    />
+                    {/* Fade edges for seamless blend */}
+                    <div class="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-surface-dark to-transparent pointer-events-none" aria-hidden="true"></div>
+                    <div class="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-surface-dark to-transparent pointer-events-none" aria-hidden="true"></div>
+                    <div class="absolute inset-x-0 top-0 h-8 bg-gradient-to-b from-surface-dark to-transparent pointer-events-none lg:hidden" aria-hidden="true"></div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <!-- Decorative bottom bar -->
+            <div class={`h-1 w-full bg-gradient-to-r from-transparent ${feat.bgColor} to-transparent`} aria-hidden="true"></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .feature-img {
+    transform: scale(1.35);
+    transform-origin: 65% 35%;
+  }
+
+  .feature-img-sidebar {
+    object-fit: none;
+    object-position: left top;
+    transform: scale(1);
+  }
+
+  .feature-panel {
+    animation: fadeIn 0.35s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelectorAll<HTMLButtonElement>('[data-feature-tab]');
+    const panels = document.querySelectorAll<HTMLDivElement>('[data-feature-panel]');
+
+    if (!tabs.length || !panels.length) return;
+
+    // Feature config for dynamic styling
+    const featureStyles: Record<string, { bgColor: string; borderColor: string; color: string; iconBg: string }> = {
+      diff:     { bgColor: 'bg-blue-500/10',    borderColor: 'border-blue-500/30',    color: 'text-blue-400',    iconBg: 'bg-blue-500/10' },
+      monaco:   { bgColor: 'bg-violet-500/10',  borderColor: 'border-violet-500/30',  color: 'text-violet-400',  iconBg: 'bg-violet-500/10' },
+      search:   { bgColor: 'bg-amber-500/10',   borderColor: 'border-amber-500/30',   color: 'text-amber-400',   iconBg: 'bg-amber-500/10' },
+      archives: { bgColor: 'bg-orange-500/10',  borderColor: 'border-orange-500/30',  color: 'text-orange-400',  iconBg: 'bg-orange-500/10' },
+      sessions: { bgColor: 'bg-cyan-500/10',    borderColor: 'border-cyan-500/30',    color: 'text-cyan-400',    iconBg: 'bg-cyan-500/10' },
+    };
+
+    const allBgClasses = Object.values(featureStyles).map(s => s.bgColor);
+    const allBorderClasses = Object.values(featureStyles).map(s => s.borderColor);
+    const allColorClasses = Object.values(featureStyles).map(s => s.color);
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const targetId = tab.dataset.featureTab!;
+        const style = featureStyles[targetId];
+        if (!style) return;
+
+        // Reset all tabs
+        tabs.forEach((t) => {
+          t.setAttribute('aria-selected', 'false');
+          t.classList.remove(...allBgClasses, ...allBorderClasses, 'shadow-lg');
+          t.classList.add('border-transparent');
+
+          const icon = t.querySelector<HTMLElement>('[data-tab-icon]');
+          const label = t.querySelector<HTMLElement>('[data-tab-label]');
+          if (icon) {
+            icon.classList.remove(...allBgClasses, ...allColorClasses);
+            icon.classList.add('bg-slate-800', 'text-slate-400');
+          }
+          if (label) {
+            label.classList.remove('text-white');
+            label.classList.add('text-slate-400');
+          }
+        });
+
+        // Activate clicked tab
+        tab.setAttribute('aria-selected', 'true');
+        tab.classList.remove('border-transparent');
+        tab.classList.add(style.bgColor, style.borderColor, 'shadow-lg');
+
+        const icon = tab.querySelector<HTMLElement>('[data-tab-icon]');
+        const label = tab.querySelector<HTMLElement>('[data-tab-label]');
+        if (icon) {
+          icon.classList.remove('bg-slate-800', 'text-slate-400');
+          icon.classList.add(style.iconBg, style.color);
+        }
+        if (label) {
+          label.classList.remove('text-slate-400');
+          label.classList.add('text-white');
+        }
+
+        // Switch panels
+        panels.forEach((panel) => {
+          const panelId = panel.dataset.featurePanel;
+          if (panelId === targetId) {
+            panel.classList.remove('opacity-0', 'hidden');
+            panel.classList.remove(...allBorderClasses);
+            panel.classList.add(style.borderColor, 'opacity-100');
+            // Re-trigger animation
+            panel.style.animation = 'none';
+            panel.offsetHeight; // force reflow
+            panel.style.animation = '';
+          } else {
+            panel.classList.add('opacity-0', 'hidden');
+            panel.classList.remove('opacity-100');
+          }
+        });
+      });
+    });
+  });
+</script>

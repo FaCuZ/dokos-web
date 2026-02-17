@@ -1,0 +1,84 @@
+---
+import Icon from './Icon.astro';
+
+const screenshots = [
+  {
+    image: '/images/app-1.png',
+    label: 'Markdown Editor',
+    desc: 'Edición split con preview en tiempo real, Mermaid y LaTeX.',
+    color: 'primary',
+  },
+  {
+    image: '/images/app-2.png',
+    label: 'JSON Viewer',
+    desc: 'Vista de árbol colapsable, grafo interactivo y modo raw.',
+    color: 'green-500',
+  },
+  {
+    image: '/images/app-3.png',
+    label: 'CSV Table',
+    desc: 'Tabla interactiva con ordenamiento, filtros y búsqueda.',
+    color: 'yellow-500',
+  },
+  {
+    image: '/images/app-4.png',
+    label: 'Diff Viewer',
+    desc: 'Comparación lado a lado con resaltado de cambios.',
+    color: 'red-500',
+  },
+  {
+    image: '/images/app-6.png',
+    label: 'Log Analyzer',
+    desc: 'Coloreado por severidad y filtros por nivel de log.',
+    color: 'purple-500',
+  },
+  {
+    image: '/images/app-8.png',
+    label: 'PDF Viewer',
+    desc: 'Navegación por páginas con zoom y atajos de teclado.',
+    color: 'cyan-500',
+  },
+];
+---
+
+<section class="py-24" id="screenshot-tour">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Option Label -->
+    <div class="text-center mb-8">
+      <span class="inline-block bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded-full px-4 py-1 text-sm font-bold tracking-wider uppercase">Opción 4 — Screenshot Tour</span>
+    </div>
+
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">Mira lo que puedes hacer</h2>
+      <p class="text-slate-400 max-w-2xl mx-auto">Cada tipo de archivo tiene su propia experiencia optimizada. Aquí van algunas.</p>
+    </div>
+
+    <!-- Screenshot Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {screenshots.map((item) => (
+        <div class="group bg-surface-dark border border-slate-800 rounded-2xl overflow-hidden hover:border-slate-700 transition-all duration-300">
+          <!-- Screenshot -->
+          <div class="relative overflow-hidden">
+            <img
+              src={item.image}
+              alt={item.label}
+              class="w-full h-48 object-cover object-top group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-surface-dark via-transparent to-transparent"></div>
+          </div>
+          <!-- Info -->
+          <div class="p-4">
+            <h3 class="text-white font-bold mb-1">{item.label}</h3>
+            <p class="text-sm text-slate-400">{item.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Bottom note -->
+    <div class="text-center mt-10">
+      <p class="text-slate-500 text-sm">Y esto es solo una muestra. <span class="text-white font-medium">Dokos soporta 17+ formatos nativamente.</span></p>
+    </div>
+  </div>
+</section>

@@ -1,43 +1,80 @@
-# Astro Starter Kit: Minimal
+# Dokos Web
 
-```sh
-npm create astro@latest -- --template minimal
+Sitio web oficial y landing de **[Dokos](https://dokos.app)** — el lector de documentos de escritorio para desarrolladores. Una app, más de 60 formatos (Markdown con LaTeX y Mermaid, JSON, YAML, CSV, PDF, Jupyter Notebooks y más), construida con Tauri 2 y Rust.
+
+## Stack
+
+- **[Astro](https://astro.build)** 5 — sitio estático y SSG
+- **[Tailwind CSS](https://tailwindcss.com)** — estilos
+- **[@astrojs/sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/)** — sitemap automático
+- **astro-seo** — meta tags y Open Graph
+- **i18n** — 10 idiomas (en, es, pt, zh, fr, hi, de, ja, ru, ko)
+
+## Requisitos
+
+- **Node.js** 18+
+- **npm** (o pnpm / yarn)
+
+## Instalación
+
+```bash
+npm install
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Comandos
 
-## 🚀 Project Structure
+| Comando           | Descripción                                      |
+| ----------------- | ------------------------------------------------ |
+| `npm run dev`     | Servidor de desarrollo en `http://localhost:4321` |
+| `npm run build`   | Build de producción en `./dist/`                 |
+| `npm run preview` | Vista previa del build antes de desplegar       |
+| `npm run astro`   | CLI de Astro (p. ej. `astro add`, `astro check`) |
 
-Inside of your Astro project, you'll see the following folders and files:
+## Estructura del proyecto
 
-```text
-/
-├── public/
+```
+dokos-web/
+├── public/                 # Assets estáticos (favicon, imágenes, robots.txt)
 ├── src/
-│   └── pages/
-│       └── index.astro
+│   ├── assets/             # SVGs e imágenes fuente
+│   ├── components/         # Componentes Astro (Hero, Navbar, Footer, etc.)
+│   ├── i18n/               # Traducciones (JSON) y utilidades (utils.ts)
+│   ├── layouts/
+│   │   └── BaseLayout.astro
+│   ├── pages/
+│   │   └── [...lang]/      # Rutas por idioma (/, /es, /pt, …)
+│   │       └── index.astro
+│   └── styles/
+│       └── global.css
+├── astro.config.mjs
+├── tailwind.config.mjs
 └── package.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+- Las páginas se generan en **rutas por idioma**: `/` (inglés), `/es`, `/pt`, `/zh`, etc.
+- Los textos se cargan desde `src/i18n/*.json` según el locale.
+- El sitemap y la configuración de sitio (`site: 'https://dokos.app'`) están en `astro.config.mjs`.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Idiomas
 
-Any static assets, like images, can be placed in the `public/` directory.
+Idiomas soportados: **en**, **es**, **pt**, **zh**, **fr**, **hi**, **de**, **ja**, **ru**, **ko**.  
+Para añadir uno nuevo:
 
-## 🧞 Commands
+1. Crear `src/i18n/<codigo>.json` (copiando `en.json` y traduciendo).
+2. Registrar el locale en `src/i18n/utils.ts` y en `astro.config.mjs` → `i18n.locales`.
+3. Añadir la ruta estática en `getStaticPaths()` de `src/pages/[...lang]/index.astro`.
 
-All commands are run from the root of the project, from a terminal:
+## Build y despliegue
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+El build genera archivos estáticos en `dist/`, listos para cualquier hosting (Vercel, Netlify, GitHub Pages, etc.):
 
-## 👀 Want to learn more?
+```bash
+npm run build
+```
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+La URL base configurada es **https://dokos.app**.
+
+## Enlaces
+
+- [Dokos — Sitio oficial](https://dokos.app)
+- [Documentación de Astro](https://docs.astro.build)
